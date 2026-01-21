@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NotfoundComponent } from "./shared/components/notfound/notfound.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NotfoundComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
