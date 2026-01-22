@@ -1,1 +1,33 @@
-<p>navbar works!</p>
+<nav #theWholeNav class="flex justify-around items-center py-4 border-2 border-sky-500 rounded-2xl shadow-lg shadow-sky-500 main m-4">
+    <img src="/cartara app image.jpeg" class="w-30" alt="">
+    <ul class="hidden md:flex gap-8">
+        @for (nav of navLinks; track nav.id) {
+            <app-navigationitem [navigation]="nav"></app-navigationitem>
+        }
+    </ul>
+    @if(isNavOpen){
+        <lucide-angular (click)="toggleNav()" [img]="close" class="my-icon cursor-pointer md:hidden"></lucide-angular>
+    }@else{
+        <lucide-angular (click)="toggleNav()" [img]="bars" class="my-icon cursor-pointer md:hidden"></lucide-angular>
+    }
+    <!-- <ul class="hidden md:flex gap-8">
+        <li><a class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" href="http://">Sign up</a></li>
+        <li><a class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" href="http://">Log in</a></li>
+        <li><a class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" href="http://">Log out</a></li>
+    </ul> -->
+    <app-authgates [screenClasses]="'hidden md:flex gap-8'" class="hidden md:block"></app-authgates>
+</nav>
+<ul #togglableNavbar [style.height.px]="navHeight" class="mob-navs shadow-lg shadow-sky-500 rounded-xl m-4 flex flex-col overflow-hidden items-center gap-4 bg-gray-2 text-zinc-200 main md:hidden transitioned ease-in-out">
+    @for (nav of navLinks; track nav.id) {
+        <app-navigationitem [navigation]="nav" [class]="{'mt-5': $first , 'mb-3': $last}"></app-navigationitem>
+    }
+    <li class="border-t-2 border-t-gray-200 w-full flex justify-center py-2 ">
+        <!-- <ul class="flex">
+            <li><a class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" href="http://">Sign up</a></li>
+            <li><a class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" href="http://">Log in</a></li>
+            <li><a class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" href="http://">Log out</a></li>
+        </ul> -->
+        <app-authgates [screenClasses]="'flex'"></app-authgates>
+    </li>
+
+</ul>

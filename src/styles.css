@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
-.main {
-  font-family: 'Bauhaus 93', sans-serif;
+@layer components {
+  .main {
+    font-family: 'Bauhaus 93', sans-serif;
+  }
+  .transitioned {
+    @apply transition-all duration-300
+  }
 }
