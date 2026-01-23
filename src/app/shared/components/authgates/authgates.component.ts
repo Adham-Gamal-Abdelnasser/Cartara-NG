@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { log } from 'node:console';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-authgates',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './authgates.component.html',
   styleUrl: './authgates.component.css',
 })

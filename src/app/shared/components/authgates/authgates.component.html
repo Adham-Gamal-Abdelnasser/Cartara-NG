@@ -1,8 +1,8 @@
 <ul [class]="screenClasses">
         @if(isLogged){
-                <li><a class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" href="http://">Log out</a></li>
+                <li><a href="https://" class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" >Log out</a></li>
         }@else {
-                <li><a class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" href="http://">Sign up</a></li>
-                <li><a class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" href="http://">Log in</a></li>
+                <li><a routerLink="/signup" class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" >Sign up</a></li>
+                <li><a routerLink="/login" class="text-gray-500 p-2 rounded-lg transitioned hover:bg-sky-500 hover:text-white" >Log in</a></li>
         }
 </ul>
