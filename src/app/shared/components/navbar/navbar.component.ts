@@ -50,4 +50,6 @@ export class NavbarComponent {
       this.theWholeNav.nativeElement.classList.replace("py-2", "py-4");
     }
   }
+  //todo check if user is guest or user
+  @Input({required: true}) isUser!: boolean ;
 }
