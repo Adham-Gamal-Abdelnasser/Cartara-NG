@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { LucideAngularModule, LucideIconData, MenuIcon, XIcon } from 'lucide-angular';
 import { NavigationitemComponent } from "../navigationitem/navigationitem.component";
-import { INavigationLink } from '../../models/navigation/inavigationlink';
+import { INavigationLink } from '../../models/navigation/inavigationlink.interface';
 import { AuthgatesComponent } from "../authgates/authgates.component";
 
 @Component({

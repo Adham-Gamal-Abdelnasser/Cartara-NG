@@ -8,4 +8,7 @@
   .transitioned {
     @apply transition-all duration-300
   }
+  .centered {
+    @apply flex justify-center items-center
+  }
 }

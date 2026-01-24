@@ -1,1 +1,41 @@
-<p>footer works!</p>
+<footer class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 shadow-xl rounded-2xl bg-neutral-700 main m-4 text-gray-400">
+
+    
+    <div class="flex flex-col gap-4 p-2 items-start ">
+        <h3 class="text-xl">
+            <app-letter>S</app-letter>upport
+        </h3>
+        <ul class="container gap-4">
+            @for(item of footerSupports; track item.id) {
+               <app-footeritem>{{item.title}}</app-footeritem>
+            }
+        </ul>
+    </div>
+    <div class="flex flex-col gap-4 p-2 items-start">
+        <h3 class="text-xl"><span class="text-sky-500">S</span>ocials</h3>
+        <ul class="centered gap-4">
+            @for (link of footerLinks; track link.id) {
+                <app-sociallink [socalLink]="link"></app-sociallink>
+            }
+        </ul>
+    </div>
+    <div class="flex flex-col gap-4 p-2 items-start ">
+        <h3 class="text-xl">
+            <app-letter>C</app-letter>ontact 
+            <app-letter>U</app-letter>S
+        </h3>
+        <ul class="container gap-4">
+             @for(item of footerContacts; track item.id) {
+               <app-footeritem>{{item.title}}</app-footeritem>
+            }
+        </ul>
+    </div>
+    
+    <img src="/logo-iso.webp" class="w-20 my-2 self-center" alt="cartara logo">  
+    <hr  class="col-span-full">  
+    <div class="col-span-full flex justify-center gap-1 mt-2">
+        <p>
+            powered by <img src="/ag.webp" class="w-5 lg:w-6 mx-2 inline" alt="Adham Gamal Abdelnasser logo"> <span><app-letter>D</app-letter>oumaverse</span> © {{copyRightYear}} All rights reserved.
+        </p>
+    </div>
+</footer>

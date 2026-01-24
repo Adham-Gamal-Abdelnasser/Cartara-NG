@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { INavigationLink } from '../../models/navigation/inavigationlink';
+import { INavigationLink } from '../../models/navigation/inavigationlink.interface';
 import { RouterLink } from "@angular/router";
 
 @Component({
