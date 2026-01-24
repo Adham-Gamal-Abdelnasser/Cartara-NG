@@ -22,7 +22,7 @@ export class NavbarComponent {
   //todo nav links
   navLinks: INavigationLink[] = [
     {name: 'Home', path: '/home', id: 0},
-    {name: 'Cart', path: '/shopping-cart', id: 1},
+    // {name: 'Cart', path: '/shopping-cart', id: 1},
     {name: 'Categories', path: '/categories', id: 2},
     {name: 'Brands', path: '/brands', id: 3},
   ]  
