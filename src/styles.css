@@ -16,4 +16,7 @@
   .active{
     @apply text-blue-500 border-b-2 border-sky-500
   }
+  .own-container {
+    @apply container mx-auto
+  }
 }

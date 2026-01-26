@@ -1,5 +1,4 @@
 import { Component , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Swiper } from 'swiper/types';
 
 @Component({
   selector: 'app-hero',
@@ -10,15 +9,6 @@ import { Swiper } from 'swiper/types';
 
 })
 export class HeroComponent {
-  spaceBetween = 10;
 
-  onProgress(event: CustomEvent<[Swiper, number]>) {
-    const [swiper, progress] = event.detail;
-    console.log(progress);
-  }
-
-  onSlideChange() {
-    console.log('slide changed');
-  }
 
 }

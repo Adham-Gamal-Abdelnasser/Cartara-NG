@@ -2,12 +2,12 @@ import { Routes } from '@angular/router';
 import { UserlayoutComponent } from './core/layouts/components/userlayout/userlayout.component';
 import { GuestlayoutComponent } from './core/layouts/components/guestlayout/guestlayout.component';
 import { NotfoundComponent } from './shared/components/notfound/notfound.component';
-import { HomeComponent } from './shared/components/home/home.component';
-import { CategoriesComponent } from './shared/components/categories/categories.component';
-import { BrandsComponent } from './shared/components/brands/brands.component';
 import { LoginComponent } from './core/auth/login/login.component';
 import { SignupComponent } from './core/auth/signup/signup.component';
-import { CartComponent } from './shared/components/cart/cart.component';
+import { HomeComponent } from './features/pages/home/home.component';
+import { CategoriesComponent } from './features/pages/categories/categories.component';
+import { BrandsComponent } from './features/pages/brands/brands.component';
+import { CartComponent } from './features/pages/cart/cart.component';
 
 export const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: "full"},
