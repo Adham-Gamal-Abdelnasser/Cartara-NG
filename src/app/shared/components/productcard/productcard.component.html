@@ -1,0 +1,17 @@
+<div class="mb-4 p-4 flex items-center justify-center">
+    <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+        <ng-template #header>
+            <img alt="product image" class="w-full" [src]="product.imageCover" />
+        </ng-template>
+        <div class="flex justify-between mb-2">
+            <h2 class="main">{{product.title.split(" ").slice(0,3).join(" ")}}</h2>
+            
+        </div>
+        <p>{{product.description.split(" ").slice(0,7).join(" ") + "......"}}</p>
+        <div class="flex justify-between my-2">
+            <p class="main bg-black rounded-full py-1 px-3 text-center text-white text-sm">{{product.brand.name}}</p>
+            <p class="flex main">{{product.ratingsAverage}}<lucide-angular [img]="star" class="text-amber-300"></lucide-angular></p>
+        </div>
+
+    </p-card>
+</div>
