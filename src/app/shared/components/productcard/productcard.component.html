@@ -4,7 +4,7 @@
             <img alt="product image" class="w-full" [src]="product.imageCover" />
         </ng-template>
         <div class="flex justify-between mb-2">
-            <h2 class="main">{{product.title.split(" ").slice(0,3).join(" ")}}</h2>
+            <h2 class="main line-clamp-1">{{product.title}}</h2>
             
         </div>
         <p>{{product.description.split(" ").slice(0,7).join(" ") + "......"}}</p>
