@@ -19,4 +19,7 @@
   .own-container {
     @apply container mx-auto
   }
+  .badge {
+    @apply bg-black rounded-full py-1 px-3 text-center text-white text-sm w-fit
+  }
 }

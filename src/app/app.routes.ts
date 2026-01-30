@@ -19,4 +19,3 @@ export const routes: Routes = [
     ]},
     {path: "**", loadComponent:()=> import('./shared/components/notfound/notfound.component').then(c=>c.NotfoundComponent)},
 ];
- 

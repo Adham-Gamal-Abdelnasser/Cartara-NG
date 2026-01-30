@@ -1,9 +1,9 @@
- .p-card {
+.p-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 0 5px black;
     border-radius: 1rem;
 }
- .p-card:hover {
+.p-card:hover {
     box-shadow: 0 0 15px #0084d1;
     transform: scale(1.01) rotate(0.5deg);
     
