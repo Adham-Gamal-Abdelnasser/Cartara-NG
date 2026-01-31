@@ -1,14 +1,14 @@
 <section class="grid grid-cols-12 gap-2 own-container">
     <div class="col-span-full lg:col-span-5 overflow-hidden rounded-2xl relative">
-        <img src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287654-cover.jpeg" class="w-full" alt="">
+        <img #mainImage src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287654-cover.jpeg" class="w-full" alt="">
         <div class="flex justify-center space-x-3 p-2 absolute bottom-2">
-            <img src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287765-1.jpeg" class="w-1/6 rounded-2xl border-black border-2 transitioned hover:border-sky-500 hover:shadow-xl hover:shadow-sky-500" alt="">
-            <img src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287765-2.jpeg" class="w-1/6 rounded-2xl border-black border-2 transitioned hover:border-sky-500 hover:shadow-xl hover:shadow-sky-500" alt="">
-            <img src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287767-3.jpeg" class="w-1/6 rounded-2xl border-black border-2 transitioned hover:border-sky-500 hover:shadow-xl hover:shadow-sky-500" alt="">
-            <img src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287767-4.jpeg" class="w-1/6 rounded-2xl border-black border-2 transitioned hover:border-sky-500 hover:shadow-xl hover:shadow-sky-500" alt="">
+            <img (click)="switchMainImage($event)" src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287765-1.jpeg" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500" alt="">
+            <img (click)="switchMainImage($event)" src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287765-2.jpeg" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500" alt="">
+            <img (click)="switchMainImage($event)" src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287767-3.jpeg" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500" alt="">
+            <img (click)="switchMainImage($event)" src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287767-4.jpeg" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500" alt="">
         </div>
     </div>
-    <div class="col-span-full lg:col-span-7 rounded-2xl bg-gray-200 shadow-xl transitioned hover:shadow-sky-500 mx-4 p-4">
+    <div class="col-span-full lg:col-span-7 rounded-2xl bg-gray-200 shadow-xl transitioned hover:shadow-sky-500 lg:mx-4 p-4">
         <p class="bg-sky-500 text-white px-4 w-fit my-1 rounded-full">Category</p>
         <p class=" text-sky-600 border border-sky-600 px-4 w-fit mt-1 mb-5 rounded-full">sub category</p>
         <div class="flex justify-between items-center">

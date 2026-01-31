@@ -12,5 +12,9 @@ export class ProductdetailsComponent {
   readonly heart:LucideIconData= HeartIcon
   readonly shoppingCart:LucideIconData = ShoppingCartIcon
   readonly star:LucideIconData = StarIcon 
-  
+  @ViewChild('mainImage') mainImage!:ElementRef
+  switchMainImage(e:PointerEvent){
+    const img = e.target as HTMLImageElement;
+    this.mainImage.nativeElement.src = img.src;
+  }
 }
