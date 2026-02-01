@@ -1,1 +1,8 @@
-<p>login works!</p>
+<section class="m-4 py-20">
+    <div class="own-container">
+        <p class="text-center main text-3xl capitalize"><app-letter>L</app-letter>ogin <app-letter>W</app-letter>orks!</p>
+        @for (input of inputFields; track input.id) {
+            <app-field [inputField]="input"></app-field>
+        }
+    </div>
+</section> 
