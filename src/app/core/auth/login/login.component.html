@@ -1,7 +1,7 @@
 <section class="m-4 py-20">
-    <div class="own-container">
+    <div class="own-container text-gray-500">
         <p class="text-center main text-3xl capitalize"><app-letter>L</app-letter>ogin <app-letter>W</app-letter>orks!</p>
-        @for (input of inputFields; track input.id) {
+        @for (input of logInFields; track input.id) {
             <app-field [inputField]="input"></app-field>
         }
     </div>

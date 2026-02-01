@@ -10,7 +10,7 @@ import { LetterComponent } from '../../../shared/components/letter/letter.compon
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  inputFields: IField[] = [
+  logInFields: IField[] = [
     { id: 1, label: 'email', type: 'text' },
     { id: 2, label: 'password', type: 'password' }
   ];
