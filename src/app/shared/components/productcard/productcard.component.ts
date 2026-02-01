@@ -15,4 +15,5 @@ export class ProductcardComponent {
   @Input() product!:IProduct
   star:LucideIconData = StarIcon
   readonly shoppingCart:LucideIconData = ShoppingCartIcon
+ 
 }

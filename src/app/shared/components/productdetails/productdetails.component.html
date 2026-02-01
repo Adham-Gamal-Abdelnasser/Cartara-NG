@@ -1,28 +1,24 @@
 <section class="grid grid-cols-12 gap-2 own-container">
     <div class="col-span-full lg:col-span-5 overflow-hidden rounded-2xl relative">
-        <img #mainImage src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287654-cover.jpeg" class="w-full" alt="">
+        <img #mainImage [src]="product.imageCover" class="w-full" alt="">
         <div class="flex justify-center space-x-3 p-2 absolute bottom-2">
-            <img (click)="switchMainImage($event)" src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287765-1.jpeg" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500" alt="">
-            <img (click)="switchMainImage($event)" src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287765-2.jpeg" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500" alt="">
-            <img (click)="switchMainImage($event)" src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287767-3.jpeg" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500" alt="">
-            <img (click)="switchMainImage($event)" src="https://ecommerce.routemisr.com/Route-Academy-products/1680400287767-4.jpeg" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500" alt="">
+            @for (img of product.images; track $index) {
+                <img (click)="switchMainImage($event)" [src]="img" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500 hover:shadow-md hover:shadow-sky-500 hover:scale-105 hover:rotate-2" alt="">
+            }
         </div>
     </div>
     <div class="col-span-full lg:col-span-7 rounded-2xl bg-gray-200 shadow-xl transitioned hover:shadow-sky-500 lg:mx-4 p-4">
-        <p class="bg-sky-500 text-white px-4 w-fit my-1 rounded-full">Category</p>
-        <p class=" text-sky-600 border border-sky-600 px-4 w-fit mt-1 mb-5 rounded-full">sub category</p>
+        <p class="bg-sky-500 text-white px-4 w-fit my-1 rounded-full">{{product.category.name}}</p>
+        <p class=" text-sky-600 border border-sky-600 px-4 w-fit mt-1 mb-5 rounded-full">{{product.subcategory[0].name}}</p>
         <div class="flex justify-between items-center">
-            <h2 class="my-2 main text-6xl">product title</h2>
-            <h3 class="my-2 main text-3xl">210 EGP</h3>
+            <h2 class="my-2 main text-6xl">{{product.title}}</h2>
+            <h3 class="my-2 main text-3xl">{{product.price}} EGP</h3>
         </div>
         <div class="flex items-center space-x-2 mb-5 main">
-            <span class="text-lg font-semibold">4.5</span>
-            <lucide-angular [img]="star" class="text-yellow-400"></lucide-angular>
-            <lucide-angular [img]="star" class="text-yellow-400"></lucide-angular>
-            <lucide-angular [img]="star" class="text-yellow-400"></lucide-angular>
+            <span class="text-lg font-semibold">{{product.ratingsAverage}}</span>
             <lucide-angular [img]="star" class="text-yellow-400"></lucide-angular>
             |
-            <span class="font-semibold"><app-letter>40</app-letter> Reviews</span>
+            <span class="font-semibold"><app-letter>{{product.ratingsQuantity}}</app-letter> Reviews</span>
         </div> 
         <div class="grid grid-cols-12 gap-2 main">
             <button class="col-span-11 badge w-full p-3 flex justify-center gap-3">
@@ -33,8 +29,7 @@
                 <lucide-angular [img]="heart" ></lucide-angular>
             </button>
         </div>
-        <p class="my-5 ">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo sit voluptas accusamus! Dolores atque laborum consectetur, ipsum cupiditate quo aperiam, voluptatum sunt vitae deserunt officiis! Perspiciatis rerum nam repellat rem?</p>
-       
-        <p class="bg-sky-200 text-sky-600 border border-sky-600 px-4 w-fit my-2 rounded-full">LC Waikiki</p>
+        <p class="my-5 ">{{product.description}}</p>
+        <p class="bg-sky-200 text-sky-600 border border-sky-600 px-4 w-fit my-2 rounded-full">{{product.brand.name}}</p>
     </div>
 </section>
