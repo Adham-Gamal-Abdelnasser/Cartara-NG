@@ -2,10 +2,13 @@ import { Component, inject } from '@angular/core';
 import { ProductcardComponent } from "../../../../../shared/components/productcard/productcard.component";
 import { ProductsService } from '../../../../../core/services/products/products.service';
 import { IProduct } from '../../../../../shared/models/product/iproduct.interface';
+import { IResult } from '../../../../../shared/models/result/iresult.interface';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-prodsection',
-  imports: [ProductcardComponent],
+  imports: [ProductcardComponent , AsyncPipe],
   templateUrl: './prodsection.component.html',
   styleUrl: './prodsection.component.css',
 })
@@ -13,14 +16,13 @@ export class ProdsectionComponent {
   //todo inject ProductsService
   _ProductsService = inject(ProductsService)
   //todo var to store products in
-  products:IProduct[] = [];
+  products$!:Observable<IResult<IProduct[]>>;
   ngOnInit(): void {
     this.recieveProductsFromService();
   }
   //todo method to call service and store products
-  recieveProductsFromService(){
-    this._ProductsService.getAllProducts().subscribe(products => {
-      this.products = products.data;      
-    })
+  recieveProductsFromService():void{
+
+    this.products$=this._ProductsService.getAllProducts();
   }
 }

@@ -9,7 +9,9 @@ import { IProduct } from '../../../shared/models/product/iproduct.interface';
 })
 export class ProductDetailsService {
   private readonly _httpClient = inject(HttpClient)
-  getSpecificProduct(productId:string|null):Observable<{data:IProduct}> {
-    return this._httpClient.get<{data:IProduct}>(`${environment.apiUrl}products/${productId}`)
+  productDetails$!:Observable<IProduct>
+  getSpecificProduct(productId:string|null):Observable<IProduct> {
+    this.productDetails$= this._httpClient.get<IProduct>(`${environment.apiUrl}products/${productId}`)
+    return this.productDetails$
   }
 }

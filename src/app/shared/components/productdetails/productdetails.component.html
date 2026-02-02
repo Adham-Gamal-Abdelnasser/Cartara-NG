@@ -1,24 +1,26 @@
 <section class="grid grid-cols-12 gap-2 own-container">
     <div class="col-span-full lg:col-span-5 overflow-hidden rounded-2xl relative">
-        <img #mainImage [src]="product.imageCover" class="w-full" alt="">
+        <img #mainImage [src]="(productDetails | async)?.imageCover" class="w-full" alt="">
         <div class="flex justify-center space-x-3 p-2 absolute bottom-2">
-            @for (img of product.images; track $index) {
+            @for (img of (productDetails | async)?.images; track $index) {
                 <img (click)="switchMainImage($event)" [src]="img" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500 hover:shadow-md hover:shadow-sky-500 hover:scale-105 hover:rotate-2" alt="">
             }
         </div>
     </div>
     <div class="col-span-full lg:col-span-7 rounded-2xl bg-gray-200 shadow-xl transitioned hover:shadow-sky-500 lg:mx-4 p-4">
-        <p class="bg-sky-500 text-white px-4 w-fit my-1 rounded-full">{{product.category.name}}</p>
-        <p class=" text-sky-600 border border-sky-600 px-4 w-fit mt-1 mb-5 rounded-full">{{product.subcategory[0].name}}</p>
+        <p class="bg-sky-500 text-white px-4 w-fit my-1 rounded-full">{{(productDetails | async)?.category?.name}}</p>
+        @for (subCat of (productDetails | async)?.subcategory; track subCat._id) {
+            <p class=" text-sky-600 border border-sky-600 px-4 w-fit mt-1 mb-5 rounded-full">{{subCat.name}}</p>
+        }
         <div class="flex justify-between items-center">
-            <h2 class="my-2 main text-6xl">{{product.title}}</h2>
-            <h3 class="my-2 main text-3xl">{{product.price}} EGP</h3>
+            <h2 class="my-2 main text-6xl">{{(productDetails | async)?.title}}</h2>
+            <h3 class="my-2 main text-3xl">{{(productDetails | async)?.price}} EGP</h3>
         </div>
         <div class="flex items-center space-x-2 mb-5 main">
-            <span class="text-lg font-semibold">{{product.ratingsAverage}}</span>
+            <span class="text-lg font-semibold">{{(productDetails | async)?.ratingsAverage}}</span>
             <lucide-angular [img]="star" class="text-yellow-400"></lucide-angular>
             |
-            <span class="font-semibold"><app-letter>{{product.ratingsQuantity}}</app-letter> Reviews</span>
+            <span class="font-semibold"><app-letter>{{(productDetails | async)?.ratingsQuantity}}</app-letter> Reviews</span>
         </div> 
         <div class="grid grid-cols-12 gap-2 main">
             <button class="col-span-11 badge w-full p-3 flex justify-center gap-3">
@@ -29,7 +31,7 @@
                 <lucide-angular [img]="heart" ></lucide-angular>
             </button>
         </div>
-        <p class="my-5 ">{{product.description}}</p>
-        <p class="bg-sky-200 text-sky-600 border border-sky-600 px-4 w-fit my-2 rounded-full">{{product.brand.name}}</p>
+        <p class="my-5 ">{{(productDetails | async)?.description}}</p>
+        <p class="bg-sky-200 text-sky-600 border border-sky-600 px-4 w-fit my-2 rounded-full">{{(productDetails | async)?.brand?.name}}</p>
     </div>
 </section>

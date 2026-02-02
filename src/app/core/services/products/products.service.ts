@@ -11,10 +11,10 @@ import { IProduct } from '../../../shared/models/product/iproduct.interface';
 export class ProductsService {
   //todo inject HttpClient
   constructor(private readonly http: HttpClient) {}
-  //todo catch base url
-  baseURL: string = environment.apiUrl;
-  
+  //todo property to get all products
+  products$!:Observable<IResult<IProduct[]>>
   getAllProducts():Observable<IResult<IProduct[]>>{
-    return this.http.get<IResult<IProduct[]>>(this.baseURL+'products');
+    this.products$= this.http.get<IResult<IProduct[]>>(environment.apiUrl+'products');
+    return this.products$;
   }
 }

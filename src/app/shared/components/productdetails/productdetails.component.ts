@@ -1,13 +1,15 @@
-import { Component, ElementRef, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { HeartIcon, LucideIconData, LucideAngularModule, ShoppingCartIcon, StarIcon } from 'lucide-angular';
 import { LetterComponent } from "../letter/letter.component";
 import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from '../../../core/services/product-details/product-details.service';
 import { IProduct } from '../../models/product/iproduct.interface';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-productdetails',
-  imports: [LucideAngularModule, LetterComponent],
+  imports: [LucideAngularModule, LetterComponent , AsyncPipe],
   templateUrl: './productdetails.component.html',
   styleUrl: './productdetails.component.css',
 })
@@ -29,16 +31,17 @@ export class ProductdetailsComponent {
   //todo property to hold product id
   productId:string | null  = null;
   //todo property to hold product details
-  product!:IProduct
+  productDetails!:Observable<IProduct>
+  recieveProductDetails(id:string|null):void{ 
+    // this._productDetailsService.getSpecificProduct(id).subscribe(res=>{
+    //   this.product = res.data
+    // })
+    this.productDetails= this._productDetailsService.getSpecificProduct(id)
+  }
   catchProductID ():void {
     this._activatedRoute.paramMap.subscribe(res => {
       this.productId = res.get('id');
       this.recieveProductDetails(this.productId);
-    })
-  }
-  recieveProductDetails(id:string|null):void{ 
-    this._productDetailsService.getSpecificProduct(id).subscribe(res=>{
-      this.product = res.data
     })
   }
   ngOnInit() :void{
