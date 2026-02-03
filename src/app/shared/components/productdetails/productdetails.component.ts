@@ -31,12 +31,9 @@ export class ProductdetailsComponent {
   //todo property to hold product id
   productId:string | null  = null;
   //todo property to hold product details
-  productDetails!:Observable<IProduct>
+  productDetails$!:Observable<{data:IProduct}>
   recieveProductDetails(id:string|null):void{ 
-    // this._productDetailsService.getSpecificProduct(id).subscribe(res=>{
-    //   this.product = res.data
-    // })
-    this.productDetails= this._productDetailsService.getSpecificProduct(id)
+    this.productDetails$= this._productDetailsService.getSpecificProduct(id)
   }
   catchProductID ():void {
     this._activatedRoute.paramMap.subscribe(res => {
