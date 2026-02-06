@@ -1,11 +1,11 @@
 <section class="m-4 py-10">
-    <h1 class="text-center main text-3xl capitalize">
+    <h1 class="text-center main text-3xl capitalize text-gray-500">
         <app-letter>C</app-letter>artara
         <app-letter>I</app-letter>s
         <app-letter>W</app-letter>aiting 
         <app-letter>Y</app-letter>ou 
     </h1> 
-    <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="own-container text-gray-500">
+    <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="own-container ">
         <!-- @for (input of signUpFields; track input.id) {
             <app-field [inputField]="input"></app-field>
         } -->
@@ -78,12 +78,17 @@
             <input type="tel" formControlName="phone" id="phone" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
             @if (phoneControl?.errors && phoneControl?.touched) {
                 <app-errormessage>
-                    @if(phoneControl?.getError('required')){ Password is required}
+                    @if(phoneControl?.getError('required')){ Phone is required}
                     @else if(phoneControl?.getError('pattern')){ Phone must be 11 numbers begins with 010, 011, 012 and 015 }
                 </app-errormessage>
             }
         </div>
 
-        <button [disabled]="signUpForm.valid" class="w-5/6 mx-auto block mt-7 rounded-xl text-zinc-100 main p-2 bg-sky-500 transitioned hover:bg-transparent hover:text-sky-500 hover:border-2 hover:border-sky-500" >Submit</button>
+        <button [disabled]="signUpForm.invalid || (isLoading | async)" class="w-5/6 cursor-pointer mx-auto flex justify-center gap-2 mt-7 rounded-xl text-zinc-100 main p-2 bg-sky-500 transitioned hover:bg-transparent hover:text-sky-500 border-2 hover:border-sky-500">
+            Submit
+            @if((isLoading | async)){
+                <lucide-angular [img]="loader"  class="animate-spin"></lucide-angular>
+            }
+        </button>
     </form>
 </section> 
