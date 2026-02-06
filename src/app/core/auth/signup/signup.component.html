@@ -1,13 +1,89 @@
 <section class="m-4 py-10">
-    <div class="own-container text-gray-500">
-        <p class="text-center main text-3xl capitalize">
-            <app-letter>C</app-letter>artara
-            <app-letter>I</app-letter>s
-            <app-letter>W</app-letter>aiting 
-            <app-letter>Y</app-letter>ou 
-        </p>
-        @for (input of signUpFields; track input.id) {
+    <h1 class="text-center main text-3xl capitalize">
+        <app-letter>C</app-letter>artara
+        <app-letter>I</app-letter>s
+        <app-letter>W</app-letter>aiting 
+        <app-letter>Y</app-letter>ou 
+    </h1> 
+    <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="own-container text-gray-500">
+        <!-- @for (input of signUpFields; track input.id) {
             <app-field [inputField]="input"></app-field>
-        }
-    </div>
+        } -->
+
+
+        <!-- ! name -->
+        @let nameControl = signUpForm.get('name');
+        <div class="card w-5/6 mx-auto my-6">
+            <label for="name" class="main text-sky-500 capitalize">name</label>
+            <input type="text" formControlName="name" id="name" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            @if(nameControl?.errors && nameControl?.touched){
+                <app-errormessage>
+                    @if(nameControl?.getError('required')){ Name is required } 
+                    @else if (nameControl?.getError('minlength')) { Name must be at least 3 characters } 
+                    @else if (nameControl?.getError('maxlength')) { Name must be at most 15 characters}
+                </app-errormessage>
+            }
+        </div>
+
+
+        <!-- ! email -->
+        @let emailControl = signUpForm.get('email');
+        <div class="card w-5/6 mx-auto my-6">
+            <label for="email" class="main text-sky-500 capitalize">email</label>
+            <input type="email" formControlName="email" id="email" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            @if (emailControl?.errors && emailControl?.touched) {
+                <app-errormessage>
+                    @if(emailControl?.getError('required')){ Email is required}
+                    @else if(emailControl?.getError('email')){ Email is invalid}
+                </app-errormessage>
+            }
+        </div>
+
+
+
+        <!-- ! password -->
+        @let passwordControl = signUpForm.get('password');
+        <div class="card w-5/6 mx-auto my-6">
+            <label for="passowrd" class="main text-sky-500 capitalize">password</label>
+            <input type="password" formControlName="password" id="passowrd" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            @if (passwordControl?.errors && passwordControl?.touched) {
+                <app-errormessage>
+                    @if(passwordControl?.getError('required')){ Password is required}
+                    @else if(passwordControl?.getError('pattern')){ Password must be at least 5 characters containing capital lettters, small ones and numbers}
+                </app-errormessage>
+            }
+        </div>
+
+
+
+        <!-- ! rePassword -->
+        @let rePasswordControl = signUpForm.get('rePassword');
+        <div class="card w-5/6 mx-auto my-6">
+            <label for="rePassword" class="main text-sky-500 capitalize">re passowrd</label>
+            <input type="password" formControlName="rePassword" id="rePassword" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            @if ((rePasswordControl?.errors && rePasswordControl?.touched) || (rePasswordControl?.getError('mismatch') && rePasswordControl?.touched)) {
+                <app-errormessage>
+                    @if(rePasswordControl?.getError('required')){ Re-pssword is required}
+                    @else if(rePasswordControl?.getError('mismatch')){ Passwords are not the same}
+                </app-errormessage>
+            }
+        </div>
+
+
+
+        <!-- ! phone -->
+        @let phoneControl = signUpForm.get('phone');
+        <div class="card w-5/6 mx-auto my-6">
+            <label for="phone" class="main text-sky-500 capitalize">phone</label>
+            <input type="tel" formControlName="phone" id="phone" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            @if (phoneControl?.errors && phoneControl?.touched) {
+                <app-errormessage>
+                    @if(phoneControl?.getError('required')){ Password is required}
+                    @else if(phoneControl?.getError('pattern')){ Phone must be 11 numbers begins with 010, 011, 012 and 015 }
+                </app-errormessage>
+            }
+        </div>
+
+        <button [disabled]="signUpForm.valid" class="w-5/6 mx-auto block mt-7 rounded-xl text-zinc-100 main p-2 bg-sky-500 transitioned hover:bg-transparent hover:text-sky-500 hover:border-2 hover:border-sky-500" >Submit</button>
+    </form>
 </section> 
