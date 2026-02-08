@@ -9,9 +9,12 @@ import { IProduct } from '../../../shared/models/product/iproduct.interface';
 })
 export class ProductDetailsService {
   private readonly _httpClient = inject(HttpClient)
-  productDetails$!:Observable<{data:IProduct}>
+  // productDetails$!:Observable<{data:IProduct}>
+  // getSpecificProduct(productId:string|null):Observable<{data:IProduct}> {
+  //   this.productDetails$= this._httpClient.get<{data:IProduct}>(`${environment.apiUrl}products/${productId}`)
+  //   return this.productDetails$
+  // }
   getSpecificProduct(productId:string|null):Observable<{data:IProduct}> {
-    this.productDetails$= this._httpClient.get<{data:IProduct}>(`${environment.apiUrl}products/${productId}`)
-    return this.productDetails$
+    return this._httpClient.get<{data:IProduct}>(`${environment.apiUrl}products/${productId}`)    
   }
 }

@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IResult } from '../../../shared/models/result/iresult.interface';
 import { IProduct } from '../../../shared/models/product/iproduct.interface';
-import { toSignal } from "@angular/core/rxjs-interop";
 
 @Injectable({
   providedIn: 'root',

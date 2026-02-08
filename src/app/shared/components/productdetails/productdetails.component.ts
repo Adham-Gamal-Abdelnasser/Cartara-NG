@@ -1,15 +1,13 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, effect, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { HeartIcon, LucideIconData, LucideAngularModule, ShoppingCartIcon, StarIcon } from 'lucide-angular';
 import { LetterComponent } from "../letter/letter.component";
 import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from '../../../core/services/product-details/product-details.service';
-import { IProduct } from '../../models/product/iproduct.interface';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
-
+import { map, switchMap } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-productdetails',
-  imports: [LucideAngularModule, LetterComponent , AsyncPipe],
+  imports: [LucideAngularModule, LetterComponent],
   templateUrl: './productdetails.component.html',
   styleUrl: './productdetails.component.css',
 })
@@ -18,31 +16,28 @@ export class ProductdetailsComponent {
   readonly heart:LucideIconData= HeartIcon
   readonly shoppingCart:LucideIconData = ShoppingCartIcon
   readonly star:LucideIconData = StarIcon 
-  //todo catch the main image
-  @ViewChild('mainImage') mainImage!:ElementRef
-  //todo replace main image with the clicked one
-  switchMainImage(e:PointerEvent){
-    const img = e.target as HTMLImageElement;
-    this.mainImage.nativeElement.src = img.src;
-  }
+  // ! ________________________________________________________________________________________________product
   //todo inject services to get product details nd catch product id from url
   private readonly _activatedRoute= inject(ActivatedRoute)
   private readonly _productDetailsService= inject(ProductDetailsService)
-  //todo property to hold product id
-  productId:string | null  = null;
-  //todo property to hold product details
-  productDetails$!:Observable<{data:IProduct}>
-  recieveProductDetails(id:string|null):void{ 
-    this.productDetails$= this._productDetailsService.getSpecificProduct(id)
-  }
-  catchProductID ():void {
-    this._activatedRoute.paramMap.subscribe(res => {
-      this.productId = res.get('id');
-      this.recieveProductDetails(this.productId);
+  product$ = this._activatedRoute.paramMap.pipe(
+    map(params => params.get('id')),
+    switchMap(id => this._productDetailsService.getSpecificProduct(id))
+  )
+  // todo hold product details in signal
+  productBox = toSignal(this.product$) 
+  // ! ________________________________________________________________________________________________image
+  selectedImage = signal<string>('')
+  constructor() {
+    // todo use effect to listen on any changes occur
+    effect(()=>{
+      const product = this.productBox()?.data
+      if(product && !this.selectedImage()){
+        this.selectedImage.set(product.imageCover)
+      }
     })
   }
-  ngOnInit() :void{
-    this.catchProductID()
+  switchMainProductImage(newSRC:string) :void{
+    this.selectedImage.set(newSRC)
   }
-
 }

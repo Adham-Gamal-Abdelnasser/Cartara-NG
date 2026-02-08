@@ -1,26 +1,26 @@
 <section class="grid grid-cols-12 gap-2 own-container">
     <div class="col-span-full lg:col-span-5 overflow-hidden rounded-2xl relative">
-        <img #mainImage [src]="(productDetails$ | async)?.data?.imageCover" class="w-full" alt="">
+        <img #mainImage [src]="selectedImage()" class="w-full" alt="">
         <div class="flex justify-center space-x-3 p-2 absolute bottom-2">
-            @for (img of (productDetails$ | async)?.data?.images; track $index) {
-                <img (click)="switchMainImage($event)" [src]="img" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500 hover:shadow-md hover:shadow-sky-500 hover:scale-105 hover:rotate-2" alt="">
+            @for (img of productBox()?.data?.images; track $index) {
+                <img (click)="switchMainProductImage(img)" [src]="img" class="w-1/6 cursor-pointer rounded-2xl border-black border-2 transitioned hover:border-sky-500 hover:shadow-md hover:shadow-sky-500 hover:scale-105 hover:rotate-2" alt="">
             }
         </div>
     </div>
     <div class="col-span-full lg:col-span-7 rounded-2xl bg-gray-200 shadow-xl transitioned hover:shadow-sky-500 lg:mx-4 p-4">
-        <p class="bg-sky-500 text-white px-4 w-fit my-1 rounded-full">{{(productDetails$ | async)?.data?.category?.name}}</p>
-        @for (subCat of (productDetails$ | async)?.data?.subcategory; track subCat._id) {
+        <p class="bg-sky-500 text-white px-4 w-fit my-1 rounded-full">{{productBox()?.data?.category?.name}}</p>
+        @for (subCat of productBox()?.data?.subcategory; track subCat._id) {
             <p class=" text-sky-600 border border-sky-600 px-4 w-fit mt-1 mb-5 rounded-full">{{subCat.name}}</p>
         }
         <div class="flex justify-between items-center">
-            <h2 class="my-2 main text-6xl">{{(productDetails$ | async)?.data?.title}}</h2>
-            <h3 class="my-2 main text-3xl">{{(productDetails$ | async)?.data?.price}} EGP</h3>
+            <h2 class="my-2 main text-6xl">{{productBox()?.data?.title}}</h2>
+            <h3 class="my-2 main text-3xl">{{productBox()?.data?.price}} EGP</h3>
         </div>
         <div class="flex items-center space-x-2 mb-5 main">
-            <span class="text-lg font-semibold">{{(productDetails$ | async)?.data?.ratingsAverage}}</span>
+            <span class="text-lg font-semibold">{{productBox()?.data?.ratingsAverage}}</span>
             <lucide-angular [img]="star" class="text-yellow-400"></lucide-angular>
             |
-            <span class="font-semibold"><app-letter>{{(productDetails$ | async)?.data?.ratingsQuantity}}</app-letter> Reviews</span>
+            <span class="font-semibold"><app-letter>{{productBox()?.data?.ratingsQuantity}}</app-letter> Reviews</span>
         </div> 
         <div class="grid grid-cols-12 gap-2 main">
             <button class="col-span-11 badge w-full p-3 flex justify-center gap-3">
@@ -31,7 +31,7 @@
                 <lucide-angular [img]="heart" ></lucide-angular>
             </button>
         </div>
-        <p class="my-5 ">{{(productDetails$ | async)?.data?.description}}</p>
-        <p class="bg-sky-200 text-sky-600 border border-sky-600 px-4 w-fit my-2 rounded-full">{{(productDetails$ | async)?.data?.brand?.name}}</p>
+        <p class="my-5 ">{{productBox()?.data?.description}}</p>
+        <p class="bg-sky-200 text-sky-600 border border-sky-600 px-4 w-fit my-2 rounded-full">{{productBox()?.data?.brand?.name}}</p>
     </div>
 </section>
