@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { IField } from '../../../shared/models/field/ifield.interface';
 import { FieldComponent } from '../../../shared/components/field/field.component';
 import { LetterComponent } from '../../../shared/components/letter/letter.component';
-import { AbstractControl, AbstractControlOptions, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ErrormessageComponent } from '../../../shared/components/errormessage/errormessage.component';
 import { AuthService } from '../../services/auth/auth.service';
 import { BehaviorSubject, finalize, Observable } from 'rxjs';
@@ -19,15 +19,24 @@ import { Router } from '@angular/router';
 export class SignupComponent {
   readonly loader = ShellIcon
   isLoading = new BehaviorSubject<boolean>(false);
-  _authService = inject(AuthService)
-  _router= inject(Router)
-  signUpForm = new FormGroup({
-    name: new FormControl("",[Validators.required,Validators.minLength(3),Validators.maxLength(15)]),
-    email: new FormControl("",[Validators.required,Validators.email,]),
-    password: new FormControl("",[Validators.required,Validators.pattern("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{5,}")]),
-    rePassword: new FormControl("",[Validators.required]),
-    phone: new FormControl("",[Validators.required,Validators.pattern("^01[0125][0-9]{8}")]),
-  }, { validators: this.confirmPasswords })    
+  signUpForm!:FormGroup
+  private readonly _authService = inject(AuthService)
+  private readonly _router= inject(Router)
+  private readonly _formBuilder= inject(FormBuilder)
+
+  initiateForm() {   
+    this.signUpForm = this._formBuilder.group({
+      name: new FormControl("",[Validators.required,Validators.minLength(3),Validators.maxLength(15)]),
+      email: new FormControl("",[Validators.required,Validators.email,]),
+      password: new FormControl("",[Validators.required,Validators.pattern("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{5,}")]),
+      rePassword: new FormControl("",[Validators.required]),
+      phone: new FormControl("",[Validators.required,Validators.pattern("^01[0125][0-9]{8}")]),
+    }, { validators: this.confirmPasswords })
+
+  }
+  ngOnInit():void {
+    this.initiateForm()
+  }
   // signUpFields:IField[] = [
     //   { id: 1, label: 'name', type: 'text',control: this.signUpForm.get('name') as FormControl , touched: this.signUpForm.get('name')?.touched as boolean},
     //   { id: 2, label: 'email', type: 'email',control: this.signUpForm.get('email') as FormControl , touched: this.signUpForm.get('email')?.touched as boolean },
