@@ -12,7 +12,7 @@ import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
-  imports: [LetterComponent,ReactiveFormsModule,ErrormessageComponent,LucideAngularModule,AsyncPipe],
+  imports: [LetterComponent, ReactiveFormsModule, ErrormessageComponent, LucideAngularModule, AsyncPipe],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
@@ -51,6 +51,7 @@ export class SignupComponent {
         console.log(err)
       })
     }else {
+      this.signUpForm.markAllAsTouched()
     }
   }  
 }

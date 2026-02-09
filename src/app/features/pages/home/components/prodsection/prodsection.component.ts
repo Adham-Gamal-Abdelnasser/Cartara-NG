@@ -12,9 +12,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
   styleUrl: './prodsection.component.css',
 })
 export class ProdsectionComponent {
-  // ! todo inject ProductsService
+  // todo inject ProductsService
   _ProductsService = inject(ProductsService)
-  // ! todo var to store products in
+  // todo var to store products in
   products = toSignal(this._ProductsService.getAllProducts())
   
 }

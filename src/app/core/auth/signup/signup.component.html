@@ -5,7 +5,7 @@
         <app-letter>W</app-letter>aiting 
         <app-letter>Y</app-letter>ou 
     </h1> 
-    <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="own-container ">
+    <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="own-container text-sky-500">
         <!-- @for (input of signUpFields; track input.id) {
             <app-field [inputField]="input"></app-field>
         } -->
@@ -14,8 +14,14 @@
         <!-- ! name -->
         @let nameControl = signUpForm.get('name');
         <div class="card w-5/6 mx-auto my-6">
-            <label for="name" class="main text-sky-500 capitalize">name</label>
-            <input type="text" formControlName="name" id="name" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            <label for="name"  [class]="{
+                'text-sky-500': nameControl?.valid && nameControl?.touched,
+                'text-red-500': nameControl?.invalid && nameControl?.touched,
+            }" class="main text-sky-500 capitalize">name</label>
+            <input type="text" formControlName="name" id="name" [class]="{
+                'border-b-sky-500': nameControl?.valid && nameControl?.touched,
+                'border-b-red-500': nameControl?.invalid && nameControl?.touched,
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
             @if(nameControl?.errors && nameControl?.touched){
                 <app-errormessage>
                     @if(nameControl?.getError('required')){ Name is required } 
@@ -29,8 +35,14 @@
         <!-- ! email -->
         @let emailControl = signUpForm.get('email');
         <div class="card w-5/6 mx-auto my-6">
-            <label for="email" class="main text-sky-500 capitalize">email</label>
-            <input type="email" formControlName="email" id="email" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            <label for="email" class="main text-sky-500 capitalize" [class]="{
+                'text-sky-500': emailControl?.valid && emailControl?.touched,
+                'text-red-500': emailControl?.invalid && emailControl?.touched,
+            }" class="main text-sky-500 capitalize">email</label>
+            <input type="email" formControlName="email" id="email" [class]="{
+                'border-b-sky-500': emailControl?.valid && emailControl?.touched,
+                'border-b-red-500': emailControl?.invalid && emailControl?.touched,
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
             @if (emailControl?.errors && emailControl?.touched) {
                 <app-errormessage>
                     @if(emailControl?.getError('required')){ Email is required}
@@ -44,8 +56,14 @@
         <!-- ! password -->
         @let passwordControl = signUpForm.get('password');
         <div class="card w-5/6 mx-auto my-6">
-            <label for="passowrd" class="main text-sky-500 capitalize">password</label>
-            <input type="password" formControlName="password" id="passowrd" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            <label for="passowrd" class="main text-sky-500 capitalize" [class]="{
+                'text-sky-500': passwordControl?.valid && passwordControl?.touched,
+                'text-red-500': passwordControl?.invalid && passwordControl?.touched,
+            }" class="main text-sky-500 capitalize">password</label>
+            <input type="password" formControlName="password" id="passowrd" [class]="{
+                'border-b-sky-500': passwordControl?.valid && passwordControl?.touched,
+                'border-b-red-500': passwordControl?.invalid && passwordControl?.touched,
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
             @if (passwordControl?.errors && passwordControl?.touched) {
                 <app-errormessage>
                     @if(passwordControl?.getError('required')){ Password is required}
@@ -59,8 +77,14 @@
         <!-- ! rePassword -->
         @let rePasswordControl = signUpForm.get('rePassword');
         <div class="card w-5/6 mx-auto my-6">
-            <label for="rePassword" class="main text-sky-500 capitalize">re passowrd</label>
-            <input type="password" formControlName="rePassword" id="rePassword" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            <label for="rePassword" class="main text-sky-500 capitalize" [class]="{
+                'text-sky-500': rePasswordControl?.valid && rePasswordControl?.touched,
+                'text-red-500': rePasswordControl?.invalid && rePasswordControl?.touched,
+            }" class="main text-sky-500 capitalize">re passowrd</label>
+            <input type="password" formControlName="rePassword" id="rePassword" [class]="{
+                'border-b-sky-500': rePasswordControl?.valid && rePasswordControl?.touched,
+                'border-b-red-500': rePasswordControl?.invalid && rePasswordControl?.touched,
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
             @if ((rePasswordControl?.errors && rePasswordControl?.touched) || (rePasswordControl?.getError('mismatch') && rePasswordControl?.touched)) {
                 <app-errormessage>
                     @if(rePasswordControl?.getError('required')){ Re-pssword is required}
@@ -74,8 +98,13 @@
         <!-- ! phone -->
         @let phoneControl = signUpForm.get('phone');
         <div class="card w-5/6 mx-auto my-6">
-            <label for="phone" class="main text-sky-500 capitalize">phone</label>
-            <input type="tel" formControlName="phone" id="phone" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            <label for="phone" class="main text-sky-500 capitalize" [class]="{
+               'text-sky-500': phoneControl?.valid && phoneControl?.touched,
+               'text-red-500': phoneControl?.invalid && phoneControl?.touched,
+            }" class="main text-sky-500 capitalize">phone</label>
+            <input type="tel" formControlName="phone" id="phone" [class]="{
+            'border-red-500': phoneControl?.invalid && phoneControl?.touched
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
             @if (phoneControl?.errors && phoneControl?.touched) {
                 <app-errormessage>
                     @if(phoneControl?.getError('required')){ Phone is required}
