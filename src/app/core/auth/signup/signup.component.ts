@@ -72,6 +72,8 @@ export class SignupComponent {
         this._toastrService.info(res.message , 'Success' ,{
           progressBar: true,
         })
+        localStorage.setItem('userToken', res.token)
+
       },err=>{
         this._toastrService.error(err.error.message, 'Error' , {
           progressBar: true,
