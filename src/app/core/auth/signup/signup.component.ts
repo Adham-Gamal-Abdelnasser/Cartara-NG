@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { IField } from '../../../shared/models/field/ifield.interface';
 import { FieldComponent } from '../../../shared/components/field/field.component';
 import { LetterComponent } from '../../../shared/components/letter/letter.component';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ErrormessageComponent } from '../../../shared/components/errormessage/errormessage.component';
 import { AuthService } from '../../services/auth/auth.service';
 import { BehaviorSubject, finalize, Observable, Subscription } from 'rxjs';
@@ -10,6 +10,7 @@ import { SignUpData } from '../../../shared/models/signup/isignup.interface';
 import { ShellIcon, LucideAngularModule } from 'lucide-angular';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-signup',
   imports: [LetterComponent, ReactiveFormsModule, ErrormessageComponent, LucideAngularModule, AsyncPipe],
@@ -17,14 +18,19 @@ import { Router } from '@angular/router';
   styleUrl: './signup.component.css',
 })
 export class SignupComponent {
+  // todo ________________________________________________icon
   readonly loader = ShellIcon
+  // todo ________________________________________________props
   isLoading = new BehaviorSubject<boolean>(false);
   signUpForm!:FormGroup
   authSubscription!: Subscription
+  errorMsg:WritableSignal<string> = signal<string>('')
+  // todo ________________________________________________services
   private readonly _authService = inject(AuthService)
   private readonly _router= inject(Router)
   private readonly _formBuilder= inject(FormBuilder)
-
+  private readonly _toastrService = inject(ToastrService)
+  // todo ________________________________________________set form values
   initiateForm():void {   
     this.signUpForm = this._formBuilder.group({
       name: new FormControl("",[Validators.required,Validators.minLength(3),Validators.maxLength(15)]),
@@ -56,14 +62,20 @@ export class SignupComponent {
   signUp():void {
     // todo unsubscribe in case of any remaining subscriptions
     this.authSubscription?.unsubscribe()
+    // todo reset error message in case of previous error message exist 
+    this.errorMsg.set("")
     if(this.signUpForm.valid){
       const data: Partial<SignUpData> = this.signUpForm.value
       this.isLoading.next(true)
       this.authSubscription= this._authService.signUp(data).pipe(finalize(()=>{this.isLoading.next(false)})).subscribe(res => {
         this._router.navigate(["/home"])
-        console.log(res)
+        this._toastrService.info(res.message , 'Success' ,{
+          progressBar: true,
+        })
       },err=>{
-        console.log(err)
+        this._toastrService.error(err.error.message, 'Error' , {
+          progressBar: true,
+        })
       })
     }else {
       this.signUpForm.markAllAsTouched()
