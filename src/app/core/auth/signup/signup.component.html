@@ -21,7 +21,7 @@
             <input type="text" formControlName="name" id="name" [class]="{
                 'border-b-sky-500': nameControl?.valid && nameControl?.touched,
                 'border-b-red-500': nameControl?.invalid && nameControl?.touched,
-            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
             @if(nameControl?.errors && nameControl?.touched){
                 <app-errormessage>
                     @if(nameControl?.getError('required')){ Name is required } 
@@ -42,7 +42,7 @@
             <input type="email" formControlName="email" id="email" [class]="{
                 'border-b-sky-500': emailControl?.valid && emailControl?.touched,
                 'border-b-red-500': emailControl?.invalid && emailControl?.touched,
-            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
             @if (emailControl?.errors && emailControl?.touched) {
                 <app-errormessage>
                     @if(emailControl?.getError('required')){ Email is required}
@@ -63,7 +63,7 @@
             <input type="password" formControlName="password" id="passowrd" [class]="{
                 'border-b-sky-500': passwordControl?.valid && passwordControl?.touched,
                 'border-b-red-500': passwordControl?.invalid && passwordControl?.touched,
-            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
             @if (passwordControl?.errors && passwordControl?.touched) {
                 <app-errormessage>
                     @if(passwordControl?.getError('required')){ Password is required}
@@ -84,7 +84,7 @@
             <input type="password" formControlName="rePassword" id="rePassword" [class]="{
                 'border-b-sky-500': rePasswordControl?.valid && rePasswordControl?.touched,
                 'border-b-red-500': rePasswordControl?.invalid && rePasswordControl?.touched,
-            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
             @if ((rePasswordControl?.errors && rePasswordControl?.touched) || (rePasswordControl?.getError('mismatch') && rePasswordControl?.touched)) {
                 <app-errormessage>
                     @if(rePasswordControl?.getError('required')){ Re-pssword is required}
@@ -104,7 +104,7 @@
             }" class="main text-sky-500 capitalize">phone</label>
             <input type="tel" formControlName="phone" id="phone" [class]="{
             'border-red-500': phoneControl?.invalid && phoneControl?.touched
-            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500" />
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
             @if (phoneControl?.errors && phoneControl?.touched) {
                 <app-errormessage>
                     @if(phoneControl?.getError('required')){ Phone is required}

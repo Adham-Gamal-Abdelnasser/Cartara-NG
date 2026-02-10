@@ -1,8 +1,59 @@
 <section class="m-4 py-20">
-    <div class="own-container text-gray-500">
-        <h1 class="text-center main text-3xl capitalize"><app-letter>H</app-letter>ello <app-letter>A</app-letter>gain!</h1>
-        @for (input of logInFields; track input.id) {
+    <h1 class="text-center main text-3xl capitalize text-gray-500">
+        <app-letter>H</app-letter>ello
+        <app-letter>A</app-letter>gain!
+    </h1>
+    <form [formGroup]="logInForm" (ngSubmit)="logIn()" class="own-container text-sky-500">
+        <!-- @for (input of logInFields; track input.id) {
             <app-field [inputField]="input"></app-field>
-        }
-    </div>
+        } -->
+
+
+        <!-- ! email -->
+        @let emailControl = logInForm.get('email');
+        <div class="card w-5/6 mx-auto my-6">
+            <label for="email" class="main text-sky-500 capitalize" [class]="{
+                'text-sky-500': emailControl?.valid && emailControl?.touched,
+                'text-red-500': emailControl?.invalid && emailControl?.touched,
+            }" class="main text-sky-500 capitalize">email</label>
+            <input type="email" formControlName="email" id="email" [class]="{
+                'border-b-sky-500': emailControl?.valid && emailControl?.touched,
+                'border-b-red-500': emailControl?.invalid && emailControl?.touched,
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
+            @if (emailControl?.errors && emailControl?.touched) {
+                <app-errormessage>
+                    @if(emailControl?.getError('required')){ Email is required}
+                    @else if(emailControl?.getError('email')){ Email is invalid}
+                </app-errormessage>
+            }
+        </div>
+
+
+
+        <!-- ! password -->
+        @let passwordControl = logInForm.get('password');
+        <div class="card w-5/6 mx-auto my-6">
+            <label for="passowrd" class="main text-sky-500 capitalize" [class]="{
+                'text-sky-500': passwordControl?.valid && passwordControl?.touched,
+                'text-red-500': passwordControl?.invalid && passwordControl?.touched,
+            }" class="main text-sky-500 capitalize">password</label>
+            <input type="password" formControlName="password" id="passowrd" [class]="{
+                'border-b-sky-500': passwordControl?.valid && passwordControl?.touched,
+                'border-b-red-500': passwordControl?.invalid && passwordControl?.touched,
+            }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
+            @if (passwordControl?.errors && passwordControl?.touched) {
+                <app-errormessage>
+                    @if(passwordControl?.getError('required')){ Password is required}
+                    @else if(passwordControl?.getError('pattern')){ Password must be at least 5 characters containing capital lettters, small ones and numbers}
+                </app-errormessage>
+            }
+        </div>
+
+        <button [disabled]="logInForm.invalid || (isLoading | async)" class="w-5/6 cursor-pointer mx-auto flex justify-center gap-2 mt-7 rounded-xl text-zinc-100 main p-2 bg-sky-500 transitioned hover:bg-transparent hover:text-sky-500 border-2 hover:border-sky-500">
+            Submit
+            @if((isLoading | async)){
+                <lucide-angular [img]="loader"  class="animate-spin"></lucide-angular>
+            }
+        </button>
+    </form>
 </section>

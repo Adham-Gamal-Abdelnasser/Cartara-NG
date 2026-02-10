@@ -25,7 +25,7 @@ export class SignupComponent {
   private readonly _router= inject(Router)
   private readonly _formBuilder= inject(FormBuilder)
 
-  initiateForm() {   
+  initiateForm():void {   
     this.signUpForm = this._formBuilder.group({
       name: new FormControl("",[Validators.required,Validators.minLength(3),Validators.maxLength(15)]),
       email: new FormControl("",[Validators.required,Validators.email,]),
@@ -54,6 +54,7 @@ export class SignupComponent {
       return pass === rePass ? null : { mismatch: true };
     }
   signUp():void {
+    // todo unsubscribe in case of any remaining subscriptions
     this.authSubscription?.unsubscribe()
     if(this.signUpForm.valid){
       const data: Partial<SignUpData> = this.signUpForm.value
