@@ -5,7 +5,7 @@ import { LetterComponent } from '../../../shared/components/letter/letter.compon
 import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ErrormessageComponent } from '../../../shared/components/errormessage/errormessage.component';
 import { AuthService } from '../../services/auth/auth.service';
-import { BehaviorSubject, finalize, Observable } from 'rxjs';
+import { BehaviorSubject, finalize, Observable, Subscription } from 'rxjs';
 import { SignUpData } from '../../../shared/models/signup/isignup.interface';
 import { ShellIcon, LucideAngularModule } from 'lucide-angular';
 import { AsyncPipe } from '@angular/common';
@@ -20,6 +20,7 @@ export class SignupComponent {
   readonly loader = ShellIcon
   isLoading = new BehaviorSubject<boolean>(false);
   signUpForm!:FormGroup
+  authSubscription!: Subscription
   private readonly _authService = inject(AuthService)
   private readonly _router= inject(Router)
   private readonly _formBuilder= inject(FormBuilder)
@@ -37,6 +38,9 @@ export class SignupComponent {
   ngOnInit():void {
     this.initiateForm()
   }
+  ngOnDestroy() :void{
+    this.authSubscription?.unsubscribe()
+  }
   // signUpFields:IField[] = [
     //   { id: 1, label: 'name', type: 'text',control: this.signUpForm.get('name') as FormControl , touched: this.signUpForm.get('name')?.touched as boolean},
     //   { id: 2, label: 'email', type: 'email',control: this.signUpForm.get('email') as FormControl , touched: this.signUpForm.get('email')?.touched as boolean },
@@ -50,10 +54,11 @@ export class SignupComponent {
       return pass === rePass ? null : { mismatch: true };
     }
   signUp():void {
+    this.authSubscription?.unsubscribe()
     if(this.signUpForm.valid){
       const data: Partial<SignUpData> = this.signUpForm.value
       this.isLoading.next(true)
-      this._authService.signUp(data).pipe(finalize(()=>{this.isLoading.next(false)})).subscribe(res => {
+      this.authSubscription= this._authService.signUp(data).pipe(finalize(()=>{this.isLoading.next(false)})).subscribe(res => {
         this._router.navigate(["/home"])
         console.log(res)
       },err=>{
