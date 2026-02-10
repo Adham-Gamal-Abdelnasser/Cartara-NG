@@ -3,12 +3,13 @@ import { UserlayoutComponent } from './core/layouts/components/userlayout/userla
 import { GuestlayoutComponent } from './core/layouts/components/guestlayout/guestlayout.component';
 import { LoginComponent } from './core/auth/login/login.component';
 import { HomeComponent } from './features/pages/home/home.component';
+import { noAuthGuard } from './core/guards/noAuth/noauth-guard';
 
 export const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: "full"},
     {path: "", component: GuestlayoutComponent,children: [
-        {path: "login", component: LoginComponent},
-        {path: "signup", loadComponent:()=> import('./core/auth/signup/signup.component').then(c=>c.SignupComponent)},
+        {path: "login", component: LoginComponent, canActivate: [noAuthGuard]},
+        {path: "signup", loadComponent:()=> import('./core/auth/signup/signup.component').then(c=>c.SignupComponent), canActivate: [noAuthGuard]},
     ]},
     {path: "", component: UserlayoutComponent,children: [
         {path: "home", component: HomeComponent},
