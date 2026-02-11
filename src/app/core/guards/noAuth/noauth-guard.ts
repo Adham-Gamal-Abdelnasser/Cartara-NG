@@ -8,12 +8,8 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
   const _router = inject(Router)
   if (isPlatformBrowser(_platform_id)) {
     const token = localStorage.getItem("userToken")!
-    try {
-      const decoded = jwtDecode(token);
-      _router.navigate(["/home"]);
-      return false
-    }catch(err){
-      return true;
+    if (token) {
+      return _router.parseUrl('/home')
     }
   }
   return true

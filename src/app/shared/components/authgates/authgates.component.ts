@@ -3,6 +3,7 @@ import { INavigationLink } from '../../models/navigation/inavigationlink.interfa
 import { GateComponent } from "../gate/gate.component";
 import { LucideAngularModule, LucideIconData, ShoppingCartIcon } from "lucide-angular";
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-authgates',
@@ -15,14 +16,14 @@ export class AuthgatesComponent {
   @Input() screenClasses!:string
   //todo recieve isLogged from navbar component that have "isUser" whether true from  userLayout or false from guestLayout
   @Input({required: true}) isLogged!:boolean
-  private readonly _router = inject(Router)
+  private readonly _authService = inject(AuthService)
+
   readonly cart:LucideIconData = ShoppingCartIcon 
   gates: Array<INavigationLink> =[
     {name: "Log in", path: "/login", id: 0},
     {name: "Sign up", path: "/signup", id: 1},
   ]
-  logOut ():void {
-    this._router.navigate(["/login"])
-    localStorage.removeItem("userToken")
+  userLogOut ():void {
+    this._authService.logOut()
   }
 }

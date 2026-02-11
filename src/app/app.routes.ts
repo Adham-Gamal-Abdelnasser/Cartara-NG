@@ -4,14 +4,15 @@ import { GuestlayoutComponent } from './core/layouts/components/guestlayout/gues
 import { LoginComponent } from './core/auth/login/login.component';
 import { HomeComponent } from './features/pages/home/home.component';
 import { noAuthGuard } from './core/guards/noAuth/noauth-guard';
+import { authGuard } from './core/guards/auth/auth-guard';
 
 export const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: "full"},
-    {path: "", component: GuestlayoutComponent,children: [
-        {path: "login", component: LoginComponent, canActivate: [noAuthGuard]},
-        {path: "signup", loadComponent:()=> import('./core/auth/signup/signup.component').then(c=>c.SignupComponent), canActivate: [noAuthGuard]},
-    ]},
-    {path: "", component: UserlayoutComponent,children: [
+    {path: "", component: GuestlayoutComponent, canActivate:[noAuthGuard],children: [
+        {path: "login", component: LoginComponent},
+        {path: "signup", loadComponent:()=> import('./core/auth/signup/signup.component').then(c=>c.SignupComponent)},
+    ] },
+    {path: "", component: UserlayoutComponent, canActivate:[authGuard],children: [
         {path: "home", component: HomeComponent},
         {path: "categories", loadComponent:()=> import('./features/pages/categories/categories.component').then(c=>c.CategoriesComponent)},
         {path: "brands", loadComponent:()=> import('./features/pages/brands/brands.component').then(c=>c.BrandsComponent)},

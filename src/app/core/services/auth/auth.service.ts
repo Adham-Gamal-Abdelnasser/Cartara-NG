@@ -6,14 +6,19 @@ import { ISignUp, SignUpData } from '../../../shared/models/signup/isignup.inter
 import { ILogIn, LogInData } from '../../../shared/models/login/ilogin.interface';
 import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
+import { IDecodedUser } from '../../../shared/models/decodeduser/idecodeduser.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  decodedUser:IDecodedUser = {} as IDecodedUser;
   private readonly _httpClient = inject(HttpClient)
   private readonly _platform_id = inject(PLATFORM_ID)
+  private readonly _router = inject(Router)
+
   signUp(data: Partial<SignUpData>): Observable<ISignUp> {
     return this._httpClient.post<ISignUp>(`${environment.apiUrl}auth/signup`,data)
   }
@@ -22,13 +27,18 @@ export class AuthService {
     return this._httpClient.post<ILogIn>(`${environment.apiUrl}auth/signin`,data)
   }
 
+  logOut():void {
+    localStorage.removeItem("userToken")
+    this._router.navigate(["/login"])
+  }
+
   checkIsLoggedIn() {
    try {
     if(isPlatformBrowser(this._platform_id)){
       const token = localStorage.getItem("userToken");
       this.isLoggedIn$.next(true)
       if(token){
-        const decoded = jwtDecode(token)
+        this.decodedUser = jwtDecode(token)
         this.isLoggedIn$.next(false)
         return;
       }

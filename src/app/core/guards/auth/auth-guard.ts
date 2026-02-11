@@ -6,15 +6,12 @@ import { jwtDecode } from 'jwt-decode';
 export const authGuard: CanActivateFn = (route, state) => {
   const _platform_id = inject(PLATFORM_ID)
   const _router = inject(Router)
+  
   if (isPlatformBrowser(_platform_id)) {
-    const token = localStorage.getItem("userToken")!
-    try {
-      const decoded = jwtDecode(token);
+    const token = localStorage.getItem("userToken")
+    if (token) {
       return true
-    }catch(err){
-      _router.navigate(["/login"]);
-      return false;
     }
   }
-  return true
+  return _router.parseUrl('/login')
 };
