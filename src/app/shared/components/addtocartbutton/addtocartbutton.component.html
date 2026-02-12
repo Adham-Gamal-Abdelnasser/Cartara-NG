@@ -1,0 +1,7 @@
+<button (click)="sendproductToCart()" class="w-full bg-black text-white main flex justify-center p-2 rounded-full cursor-pointer">
+   Add to Cart
+   <lucide-angular [img]="shoppingCart" class="ml-2"></lucide-angular>
+    @if(isLoading | async){
+        <lucide-angular [img]="loader"  class="animate-spin"></lucide-angular>
+    }
+</button>

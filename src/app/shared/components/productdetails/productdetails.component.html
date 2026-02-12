@@ -22,11 +22,8 @@
             |
             <span class="font-semibold"><app-letter>{{productBox()?.data?.ratingsQuantity}}</app-letter> Reviews</span>
         </div> 
-        <div class="grid grid-cols-12 gap-2 main">
-            <button class="col-span-11 badge w-full p-3 flex justify-center gap-3">
-                Add to cart
-                <lucide-angular [img]="shoppingCart" class=""></lucide-angular>
-            </button>
+        <div class="grid grid-cols-12 items-center gap-2 main">
+            <app-addtocartbutton class="col-span-11" [prdID]="productBox()?.data?._id!"></app-addtocartbutton>
             <button class="col-span-1 bg-gray-300 p-3 flex justify-center rounded-full">
                 <lucide-angular [img]="heart" ></lucide-angular>
             </button>

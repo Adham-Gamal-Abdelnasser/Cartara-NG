@@ -5,9 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from '../../../core/services/product-details/product-details.service';
 import { map, switchMap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { AddtocartbuttonComponent } from "../addtocartbutton/addtocartbutton.component";
 @Component({
   selector: 'app-productdetails',
-  imports: [LucideAngularModule, LetterComponent],
+  imports: [LucideAngularModule, LetterComponent, AddtocartbuttonComponent],
   templateUrl: './productdetails.component.html',
   styleUrl: './productdetails.component.css',
 })

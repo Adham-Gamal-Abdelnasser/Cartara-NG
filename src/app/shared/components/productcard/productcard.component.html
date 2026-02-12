@@ -15,12 +15,7 @@
                 </div>
             </div>
             <ng-template #footer>
-
-                <button class="w-full bg-black text-white main flex justify-center p-2 rounded-lg cursor-pointer">
-                    Add to Cart
-                    <lucide-angular [img]="shoppingCart" class="ml-2"></lucide-angular>
-                 </button>
-
+                <app-addtocartbutton [prdID]="product.id"></app-addtocartbutton>
             </ng-template> 
         </p-card>
 </div>
