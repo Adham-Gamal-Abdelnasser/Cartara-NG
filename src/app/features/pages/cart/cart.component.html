@@ -1,59 +1,29 @@
-<section class="m-4 grid grid-cols-1 md:grid-cols-3 gap-2">
-    <div class="bg-gray-200 rounded-2xl p-5 col-span-full md:col-span-2">
-        <h1 class="main text-center text-2xl text-gray-600">Shopping Cart</h1>
-        <div class="max-w-5xl mx-auto rounded-2xl">
-            <div class="max-w-6xl mx-auto">
-                <div class="w-full overflow-x-auto">
-                    <table class="w-full border-separate border-spacing-y-4">
-                        <thead>
-                            <tr class="bg-sky-500 text-white text-left">
-                                <th class="px-6 py-3 rounded-l-xl">Product</th>
-                                <th class="px-6 py-3">Price</th>
-                                <th class="px-6 py-3 text-center">Quantity</th>
-                                <th class="px-6 py-3 text-right rounded-r-xl">Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- ! Repeatable -->
-                            <tr class="bg-gray-100 shadow-sm">
-                                <td class="px-6 py-4 rounded-l-xl">
-                                    <div class="flex items-center gap-4">
-                                        <button class="text-gray-400 hover:text-red-500 text-xl shrink-0">✕</button>
-                                        <img src="logo-iso.webp" class="w-16 rounded-xl object-cover shrink-0" />
-                                        <div class="min-w-0">
-                                            <h3 class="font-semibold text-gray-800 truncate">Fresh Oranges</h3>
-                                            <p class="text-sm text-gray-500">500 g</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">$11.75</td>
-                                <td class="px-6 py-4 text-center">
-                                    <div class="inline-flex items-center border rounded-full px-3 py-1 gap-4 whitespace-nowrap">
-                                        <button class="text-lg font-semibold">−</button>
-                                        <span class="font-medium">4</span>
-                                        <button class="text-lg font-semibold">+</button>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-right font-semiboldtext-gray-800 whitespace-nowrap rounded-r-xl">$47.00</td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
+<section class="m-4 grid grid-cols-1 lg:grid-cols-3 gap-2">
+    <div class="bg-gray-200 rounded-2xl p-5 col-span-full lg:col-span-2">
+        <h1 class="main text-center text-2xl text-gray-600 mb-4">Shopping Cart</h1>
+        <div class="max-w-6xl mx-auto p-4">
+            <div class="overflow-x-auto">
+                <div class="min-w-175">
+                    <div class="grid grid-cols-5 bg-sky-500 text-white font-semibold rounded-xl px-6 py-4 mb-4">
+                        <p class="col-span-2">Product</p>
+                        <p class="text-center">Price</p>
+                        <p class="text-center">Quantity</p>
+                        <p class="text-right">Subtotal</p>
+                    </div>
+                    <!-- ! Repeatable -->
+                    @for (item of userCartDetails().products; track item._id) {
+                        <app-cartitem [productCartItem]="item"></app-cartitem>
+
+                    }
                 </div>
             </div>
         </div>
-
     </div>
-    <div class="bg-neutral-700 text-gray-400 rounded-2xl p-5 col-span-full md:col-span-1">
+    <div class="bg-neutral-700 text-gray-400 rounded-2xl p-5 col-span-full lg:col-span-1">
         <h2 class="main text-sky-500 text-center text-2xl">Order Summary</h2>
-        <div>
-            <p class="flex justify-between text-lg my-2"><span>items</span><span>9</span></p>
-            <p class="flex justify-between text-lg my-2"><span>subtotal</span><span>2500</span></p>
-            <p class="flex justify-between text-lg my-2"><span>shipping</span><span>0</span></p>
-            <p class="flex justify-between text-lg my-2"><span>taxes</span><span>150</span></p>
-            <hr/>
-            <p class="flex justify-between text-lg"><span>total</span><span>2650</span></p>
-            <button class="bg-sky-500 w-full text-white p-2 rounded-full my-4 main border-2 border-transparent hover:text-sky-500 hover:bg-transparent hover:border-sky-500 transitioned cursor-pointer">purchase</button>
-        </div>
+        <p class="flex justify-between text-lg my-2"><span>items</span><span>4</span></p>
+        <hr/>
+        <p class="flex justify-between text-lg"><span>total</span><span>{{userCartDetails().totalCartPrice}}</span></p>
+        <button class="bg-sky-500 w-full text-white p-2 rounded-full my-4 main border-2 border-transparent hover:text-sky-500 hover:bg-transparent hover:border-sky-500 transitioned cursor-pointer">purchase</button>
     </div>
 </section>

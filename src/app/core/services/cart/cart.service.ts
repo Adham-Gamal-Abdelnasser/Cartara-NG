@@ -12,5 +12,9 @@ export class CartService {
   cartHeaders:{headers:{token:string}}={headers: {token: localStorage.getItem("userToken")!}}
   addProducttoCart(productId:string):Observable<ICartResult>{
     return this._httpClient.post<ICartResult>(`${environment.cartBase2}cart`, {productId}, this.cartHeaders)
-  }  
+  }
+  
+  getLoggedUserCart():Observable<ICartResult> {
+    return this._httpClient.get<ICartResult>(`${environment.cartBase2}cart`,this.cartHeaders)
+  }
 }
