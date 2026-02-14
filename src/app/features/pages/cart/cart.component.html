@@ -2,6 +2,7 @@
     <div class="bg-gray-200 rounded-2xl p-5 col-span-full lg:col-span-2">
         <h1 class="main text-center text-2xl text-gray-600 mb-4">Shopping Cart</h1>
         <div class="max-w-6xl mx-auto p-4">
+            <button (click)="clearCart()" class="py-2 px-4 main text-white bg-neutral-700 rounded-lg my-2 cursor-pointer border-2 border-transparent transitioned hover:text-neutral-700 hover:bg-transparent hover:border-neutral-700 ">clear</button>
             <div class="overflow-x-auto">
                 <div class="min-w-175">
                     <div class="grid grid-cols-5 bg-sky-500 text-white font-semibold rounded-xl px-6 py-4 mb-4">
@@ -18,6 +19,8 @@
                             (increasedCount)="updateItemCount(item.product._id, item.count + 1)"
                             (decreasedCount)="updateItemCount(item.product._id, item.count - 1)">
                         </app-cartitem>
+                    }@empty {
+                        <p class="text-gray-600">No Products Added yet!</p>
                     }
                 </div>
             </div>

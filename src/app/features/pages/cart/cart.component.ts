@@ -40,6 +40,14 @@ export class CartComponent {
       this._toastrService.error(err.error.message)
     })
   }
+  
+  clearCart():void {
+    this._cartService.clearUserCart().subscribe(res=>{
+      this.userCartDetails.set(res.data)
+    },err=>{
+      this._toastrService.error(err.error.message)
+    })
+  }
 
   ngOnInit():void {
     this.recieveUserCart()
