@@ -18,20 +18,25 @@ export class CartComponent {
   private readonly _toastrService = inject(ToastrService)
   recieveUserCart():void {
       this._cartService.getLoggedUserCart().subscribe(res=>{
-        console.log(res);
         this.userCartDetails.set(res.data)
       },err=>{
-        console.log(err);
+        this._toastrService.error(err.error.message)
       })
   }
 
   deleteProduct(id:string):void {
     this._cartService.removeSpecificCartItem(id).subscribe(res=>{
       this._toastrService.info(res.message)
-      this.recieveUserCart()
-      console.log(res)
+      this.userCartDetails.set(res.data)
     },err=> {
-      console.log(err)
+      this._toastrService.error(err.error.message)
+    })
+  }
+
+  updateItemCount(id:string, count:number):void{
+    this._cartService.updateCartProductQuantity(id,count).subscribe(res=>{
+      this.userCartDetails.set(res.data)
+    },err=>{
       this._toastrService.error(err.error.message)
     })
   }

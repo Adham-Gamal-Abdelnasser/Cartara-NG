@@ -14,9 +14,9 @@
     <div class="text-center text-gray-700 col-span-1">{{productCartItem().price}}</div>
     <div class="flex justify-center col-span-1">
         <div class="flex items-center border rounded-full overflow-hidden">
-            <button class="px-4 py-2 hover:bg-gray-100 cursor-pointer">-</button>
+            <button (click)="emitProductDecrease()" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">-</button>
             <span class="px-4">{{productCartItem().count}}</span>
-            <button class="px-4 py-2 hover:bg-gray-100 cursor-pointer">+</button>
+            <button (click)="emitProductIncrease()" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">+</button>
         </div>
     </div>
     <div class="text-right font-semibold text-gray-800 col-span-1">{{productCartItem().count * productCartItem().price}}</div>

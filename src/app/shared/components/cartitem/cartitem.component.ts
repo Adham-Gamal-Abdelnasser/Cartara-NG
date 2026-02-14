@@ -14,9 +14,17 @@ export class CartitemComponent {
   readonly trash = Trash2Icon
   productCartItem:InputSignal<Product> = input.required<Product>({})
   deletedPrd= output<null>()
+  increasedCount= output<null>()
+  decreasedCount= output<null>()
   private readonly _cartService = inject(CartService)
   private readonly _toastrService = inject(ToastrService)
   emitProductDeletion():void {
     this.deletedPrd.emit(null)
+  }
+  emitProductIncrease(){
+    this.increasedCount.emit(null)
+  }
+  emitProductDecrease(){
+    this.decreasedCount.emit(null)
   }
 }

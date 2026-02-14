@@ -12,9 +12,12 @@
                     </div>
                     <!-- ! Repeatable -->
                     @for (item of userCartDetails().products; track item.product._id) {
-                        <app-cartitem [productCartItem]="item" (deletedPrd)="deleteProduct(item.product._id)">
+                        <app-cartitem 
+                            [productCartItem]="item" 
+                            (deletedPrd)="deleteProduct(item.product._id)" 
+                            (increasedCount)="updateItemCount(item.product._id, item.count + 1)"
+                            (decreasedCount)="updateItemCount(item.product._id, item.count - 1)">
                         </app-cartitem>
-
                     }
                 </div>
             </div>

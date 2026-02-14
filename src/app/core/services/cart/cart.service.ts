@@ -21,4 +21,10 @@ export class CartService {
   removeSpecificCartItem(productId:string) :Observable<ICartResult> {
     return this._httpClient.delete<ICartResult>(`${environment.cartBase2}cart/${productId}`,this.cartHeaders)
   }
+
+  updateCartProductQuantity(productId:string,count:number):Observable<ICartResult> {
+    return this._httpClient.put<ICartResult>(`${environment.cartBase2}cart/${productId}`,{
+      count,
+    },this.cartHeaders)
+  }
 }
