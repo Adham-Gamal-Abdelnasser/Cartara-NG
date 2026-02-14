@@ -1,6 +1,5 @@
 import { IBrand } from "../brand/ibrand.interface";
 import { ICategory } from "../category/icategory.interface";
-import { IProduct } from "../product/iproduct.interface";
 import { ISubCategory } from "../subcategory/isubcategory.interface";
 
 export interface ICartResult {

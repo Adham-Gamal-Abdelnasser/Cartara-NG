@@ -17,4 +17,8 @@ export class CartService {
   getLoggedUserCart():Observable<ICartResult> {
     return this._httpClient.get<ICartResult>(`${environment.cartBase2}cart`,this.cartHeaders)
   }
+
+  removeSpecificCartItem(productId:string) :Observable<ICartResult> {
+    return this._httpClient.delete<ICartResult>(`${environment.cartBase2}cart/${productId}`,this.cartHeaders)
+  }
 }

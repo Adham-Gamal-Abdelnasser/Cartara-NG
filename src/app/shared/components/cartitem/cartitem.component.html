@@ -1,6 +1,6 @@
 <div class="grid grid-cols-5 items-center bg-white rounded-xl shadow-sm px-3 py-4 mb-4">
         <div class="flex items-center gap-4 col-span-2">
-            <button class="text-gray-400 hover:text-red-500 transitioned cursor-pointer text-xl">
+            <button (click)="emitProductDeletion()" class="text-gray-400 hover:text-red-500 transitioned cursor-pointer text-xl">
                 <lucide-angular [img]="trash"></lucide-angular>
             </button>
             <div class="flex items-center gap-3">
