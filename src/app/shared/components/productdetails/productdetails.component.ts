@@ -6,9 +6,10 @@ import { ProductDetailsService } from '../../../core/services/product-details/pr
 import { map, switchMap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AddtocartbuttonComponent } from "../addtocartbutton/addtocartbutton.component";
+import { AddtowishlistbuttonComponent } from "../addtowishlistbutton/addtowishlistbutton.component";
 @Component({
   selector: 'app-productdetails',
-  imports: [LucideAngularModule, LetterComponent, AddtocartbuttonComponent],
+  imports: [LucideAngularModule, LetterComponent, AddtocartbuttonComponent, AddtowishlistbuttonComponent],
   templateUrl: './productdetails.component.html',
   styleUrl: './productdetails.component.css',
 })

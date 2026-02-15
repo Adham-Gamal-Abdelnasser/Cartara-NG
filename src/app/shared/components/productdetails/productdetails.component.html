@@ -24,9 +24,7 @@
         </div> 
         <div class="grid grid-cols-12 items-center gap-2 main">
             <app-addtocartbutton class="col-span-11" [prdID]="productBox()?.data?._id!"></app-addtocartbutton>
-            <button class="col-span-1 bg-gray-300 p-3 flex justify-center rounded-full">
-                <lucide-angular [img]="heart" ></lucide-angular>
-            </button>
+            <app-addtowishlistbutton [prdID]="productBox()?.data?._id!"></app-addtowishlistbutton>
         </div>
         <p class="my-5 ">{{productBox()?.data?.description}}</p>
         <p class="bg-sky-200 text-sky-600 border border-sky-600 px-4 w-fit my-2 rounded-full">{{productBox()?.data?.brand?.name}}</p>

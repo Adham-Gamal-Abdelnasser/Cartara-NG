@@ -1,4 +1,4 @@
-<div class="bg-gray-200 rounded-2xl p-5 m-4">
+<div class="bg-gray-200 rounded-2xl p-5 m-4 min-h-screen">
     <h1 class="main text-center text-2xl text-gray-600 mb-4">Your Wish List</h1>
     <div class="max-w-6xl mx-auto p-4">
         <div class="overflow-x-auto">
@@ -11,7 +11,7 @@
                 @for (item of wishProducts(); track item._id) {
                     <app-wishitem [productWishItem]="item" (deletedWishPrd)="deleteWishProduct(item._id)"></app-wishitem>
                 }@empty {
-                    <p class="text-gray-600">No Products Added yet!</p>
+                    <p class="text-gray-600 text-center">No Products Added yet!</p>
                 }
             </div>
         </div>

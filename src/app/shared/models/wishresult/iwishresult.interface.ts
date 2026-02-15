@@ -5,3 +5,9 @@ export interface IWishResult {
   count: number
   data: IProduct[]
 }
+
+export interface IWishAddingResult {
+  status: string
+  message: string
+  data: string[]
+}
