@@ -16,6 +16,9 @@
             </div>
             <ng-template #footer>
                 <app-addtocartbutton [prdID]="product.id"></app-addtocartbutton>
+                <button class="col-span-1 bg-gray-300 p-3 flex justify-center rounded-full">
+                    <lucide-angular [img]="heart" ></lucide-angular>
+                </button>
             </ng-template> 
         </p-card>
 </div>

@@ -6,11 +6,11 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ErrormessageComponent } from "../../../shared/components/errormessage/errormessage.component";
 import { BehaviorSubject, finalize, Subscription } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { LucideAngularModule, ShellIcon } from 'lucide-angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { LogInData } from '../../../shared/models/login/ilogin.interface';
 import { ToastrService } from 'ngx-toastr';
+import { LucideAngularModule, ShellIcon } from 'lucide-angular';
 
 @Component({
   selector: 'app-login',

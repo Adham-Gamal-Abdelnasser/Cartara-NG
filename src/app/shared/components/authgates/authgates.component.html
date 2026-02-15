@@ -1,6 +1,11 @@
 <ul [class]="screenClasses + ' items-center' ">
         @if(isLogged){
                 <li class="text-gray-500 p-2 transitioned rounded-lg hover:text-sky-500">
+                        <a routerLink="/wishlist" routerLinkActive="text-sky-500">
+                              <lucide-angular [img]="heart" ></lucide-angular>  
+                        </a>
+                </li>
+                <li class="text-gray-500 p-2 transitioned rounded-lg hover:text-sky-500">
                         <a routerLink="/cart" routerLinkActive="text-sky-500">
                               <lucide-angular [img]="cart" ></lucide-angular>  
                         </a>

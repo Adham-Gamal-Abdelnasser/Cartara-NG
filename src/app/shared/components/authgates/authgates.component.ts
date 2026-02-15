@@ -1,7 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { INavigationLink } from '../../models/navigation/inavigationlink.interface';
 import { GateComponent } from "../gate/gate.component";
-import { LucideAngularModule, LucideIconData, ShoppingCartIcon } from "lucide-angular";
+import { HeartIcon, LucideAngularModule, LucideIconData, ShoppingCartIcon } from "lucide-angular";
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { AuthService } from '../../../core/services/auth/auth.service';
 
@@ -12,6 +12,7 @@ import { AuthService } from '../../../core/services/auth/auth.service';
   styleUrl: './authgates.component.css',
 })
 export class AuthgatesComponent {
+  readonly heart = HeartIcon
   //todo reviece screenClasses from navbar component to apply to the ul element
   @Input() screenClasses!:string
   //todo recieve isLogged from navbar component that have "isUser" whether true from  userLayout or false from guestLayout

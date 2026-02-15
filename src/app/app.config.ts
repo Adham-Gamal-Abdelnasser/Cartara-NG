@@ -12,12 +12,13 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes), provideClientHydration(withEventReplay()),
     providePrimeNG({
-        theme: {
-          preset: Aura,
-          options: {darkModeSelector: false || 'none'}
-        }
+      theme: {
+        preset: Aura,
+        options: { darkModeSelector: false || 'none' }
+      }
     }),
     provideHttpClient(withFetch()),
-    provideToastr()
+    provideToastr(),
+
   ]
 };

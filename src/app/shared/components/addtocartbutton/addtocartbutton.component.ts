@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-addtocartbutton',
-  imports: [LucideAngularModule,AsyncPipe],
+  imports: [LucideAngularModule, AsyncPipe],
   templateUrl: './addtocartbutton.component.html',
   styleUrl: './addtocartbutton.component.css',
 })

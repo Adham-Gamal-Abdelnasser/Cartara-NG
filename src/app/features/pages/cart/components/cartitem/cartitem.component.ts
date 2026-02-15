@@ -1,8 +1,9 @@
 import { Component, inject, input, InputSignal, output } from '@angular/core';
 import { LucideAngularModule, Trash2Icon } from 'lucide-angular';
-import { Product } from '../../models/cartresult/icartresult.interface';
-import { CartService } from '../../../core/services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { Product } from '../../../../../shared/models/cartresult/icartresult.interface';
+import { CartService } from '../../../../../core/services/cart/cart.service';
+
 
 @Component({
   selector: 'app-cartitem',

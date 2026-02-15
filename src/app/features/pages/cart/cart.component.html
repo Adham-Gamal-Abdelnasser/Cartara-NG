@@ -28,7 +28,7 @@
     </div>
     <div class="bg-neutral-700 text-gray-400 rounded-2xl p-5 col-span-full lg:col-span-1">
         <h2 class="main text-sky-500 text-center text-2xl">Order Summary</h2>
-        <p class="flex justify-between text-lg my-2"><span>items</span><span>4</span></p>
+        <p class="flex justify-between text-lg my-2"><span>items</span><span>{{userCartDetails().products.length}}</span></p>
         <hr/>
         <p class="flex justify-between text-lg"><span>total</span><span>{{userCartDetails().totalCartPrice}}</span></p>
         <button class="bg-sky-500 w-full text-white p-2 rounded-full my-4 main border-2 border-transparent hover:text-sky-500 hover:bg-transparent hover:border-sky-500 transitioned cursor-pointer">purchase</button>

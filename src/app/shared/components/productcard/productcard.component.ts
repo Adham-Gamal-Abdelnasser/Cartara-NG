@@ -1,9 +1,8 @@
-import { ShoppingCartIcon } from 'lucide-angular';
 import { Component, Input } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { IProduct } from '../../models/product/iproduct.interface';
-import { LucideAngularModule, LucideIconData, StarIcon } from 'lucide-angular';
+import { LucideAngularModule, HeartIcon, StarIcon, LucideIconData } from 'lucide-angular';
 import { RouterLink } from "@angular/router";
 import { AddtocartbuttonComponent } from "../addtocartbutton/addtocartbutton.component";
 @Component({
@@ -14,7 +13,7 @@ import { AddtocartbuttonComponent } from "../addtocartbutton/addtocartbutton.com
 })
 export class ProductcardComponent {
   @Input() product!:IProduct
+  readonly heart= HeartIcon
   star:LucideIconData = StarIcon
-  readonly shoppingCart:LucideIconData = ShoppingCartIcon
  
 }
