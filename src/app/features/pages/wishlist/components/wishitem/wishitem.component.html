@@ -1,0 +1,18 @@
+<div class="grid grid-cols-4 items-center bg-white rounded-xl shadow-sm px-3 py-4 mb-4">
+        <div class="flex items-center gap-4 col-span-2">
+            <button class="text-gray-400 hover:text-red-500 transitioned cursor-pointer text-xl">
+                <lucide-angular [img]="trash"></lucide-angular>
+            </button>
+            <div class="flex items-center gap-3">
+                <img [src]="productWishItem().imageCover" class="w-16 object-cover rounded-lg" />
+            <div>
+                <h4 class="font-semibold text-gray-800">{{productWishItem().title}}</h4>
+                <p class="text-sm text-gray-500">{{productWishItem().category.name}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center text-gray-700 col-span-1">{{productWishItem().price}} EGP</div>
+    <div class="flex justify-center col-span-1">
+        <app-addtocartbutton [prdID]="'sdfj6545sdf'"></app-addtocartbutton>
+    </div>
+</div> 

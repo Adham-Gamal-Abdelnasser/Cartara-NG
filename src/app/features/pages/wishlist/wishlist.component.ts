@@ -1,14 +1,31 @@
-import { Component } from '@angular/core';
-import { Trash2Icon, LucideAngularModule } from 'lucide-angular';
-import { AddtocartbuttonComponent } from "../../../shared/components/addtocartbutton/addtocartbutton.component";
+import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { WishitemComponent } from "./components/wishitem/wishitem.component";
+import { WishlistService } from '../../../core/services/wishlist/wishlist.service';
+import { ToastrService } from 'ngx-toastr';
+import { IProduct } from '../../../shared/models/product/iproduct.interface';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [LucideAngularModule, AddtocartbuttonComponent],
+  imports: [WishitemComponent],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css',
 })
 export class WishlistComponent {
-  readonly trash = Trash2Icon
+  private readonly _wishlistService = inject(WishlistService)
+  private readonly _toastrService = inject(ToastrService)
+  wishProducts: WritableSignal<IProduct[]> = signal<IProduct[]>([])
 
+  recieveWishProducts():void {
+    this._wishlistService.getLoggedUserWishlist().subscribe(res=>{
+      console.log(res);
+      this.wishProducts.set(res.data)
+    },err=>{
+      console.log(err)
+      this._toastrService.error(err.error.message);
+    })
+  }
+
+  ngOnInit():void {
+    this.recieveWishProducts();
+  }
 }

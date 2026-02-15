@@ -1,10 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment.development';
+import { IWishResult } from '../../../shared/models/wishresult/iwishresult.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WishlistService {
   private readonly _httpClient = inject(HttpClient)
+  wishlistHeaders:{headers:{token:string}} = {headers:{token:localStorage.getItem("userToken")!}}
 
+  getLoggedUserWishlist():Observable<IWishResult> {
+    return this._httpClient.get<IWishResult>(`${environment.apiUrl}wishlist`,this.wishlistHeaders);
+  }
 }
