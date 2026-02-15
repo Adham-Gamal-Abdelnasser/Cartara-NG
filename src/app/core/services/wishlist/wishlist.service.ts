@@ -14,4 +14,8 @@ export class WishlistService {
   getLoggedUserWishlist():Observable<IWishResult> {
     return this._httpClient.get<IWishResult>(`${environment.apiUrl}wishlist`,this.wishlistHeaders);
   }
+
+  removeProductFromWishlist(id:string):Observable<any> {
+    return this._httpClient.delete(`${environment.apiUrl}wishlist/${id}`,this.wishlistHeaders)
+  }
 }

@@ -25,6 +25,15 @@ export class WishlistComponent {
     })
   }
 
+  deleteWishProduct(id:string):void {
+    this._wishlistService.removeProductFromWishlist(id).subscribe(res=>{
+      this.wishProducts.set(res.data)
+      this._toastrService.info(res.message)
+    },err=>{
+      this._toastrService.error(err.error.message)
+    })
+  }
+
   ngOnInit():void {
     this.recieveWishProducts();
   }

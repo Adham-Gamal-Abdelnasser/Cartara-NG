@@ -9,11 +9,10 @@
                     <p class="text-center">Action</p>
                 </div>
                 @for (item of wishProducts(); track item._id) {
-                    <app-wishitem [productWishItem]="item"></app-wishitem>
+                    <app-wishitem [productWishItem]="item" (deletedWishPrd)="deleteWishProduct(item._id)"></app-wishitem>
                 }@empty {
                     <p class="text-gray-600">No Products Added yet!</p>
                 }
-                
             </div>
         </div>
     </div>
