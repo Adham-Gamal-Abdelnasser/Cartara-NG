@@ -4,10 +4,11 @@ import { CartService } from '../../../core/services/cart/cart.service';
 import { CartData } from '../../../shared/models/cartresult/icartresult.interface';
 import { ToastrService } from 'ngx-toastr';
 import { CartitemComponent } from './components/cartitem/cartitem.component';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-cart',
-  imports: [LucideAngularModule, CartitemComponent],
+  imports: [LucideAngularModule, CartitemComponent, RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })

@@ -1,0 +1,53 @@
+<section class="m-4 py-4">
+    <h1 class="text-center main text-3xl capitalize text-gray-500">
+        <app-letter>C</app-letter>heckout
+        <app-letter>O</app-letter>rder!
+    </h1>
+    <form [formGroup]="checkoutSessionForm" (ngSubmit)="submitCheckoutSessionForm()" class="own-container">
+        <div formGroupName="shippingAddress">
+            <!-- ! Details -->
+            <div class="card w-5/6 mx-auto my-6">
+                <label for="details" class="main text-sky-500 capitalize" [class]="{}" class="main text-sky-500 capitalize">details</label>
+                <textarea type="text" formControlName="details" id="details" [class]="{}" rows="4" class="w-full border-2 border-gray-500 rounded-lg outline-none px-2 py-1 focus:border-sky-500 text-gray-500 resize-none" ></textarea>
+                <!-- @if (detailsControl?.errors && detailsControl?.touched) {
+                    <app-errormessage>
+                        @if(detailsControl?.getError('required')){ details is required}
+                        @else if(detailsControl?.getError('details')){ details is invalid}
+                    </app-errormessage>
+                } -->
+            </div>
+
+            <!-- ! Phone -->
+            <div class="card w-5/6 mx-auto my-6">
+                <label for="phone" class="main text-sky-500 capitalize" [class]="{}" class="main text-sky-500 capitalize">phone</label>
+                <input type="tel" formControlName="phone" id="phone" [class]="{}" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
+                <!-- @if (phoneControl?.errors && phoneControl?.touched) {
+                    <app-errormessage>
+                        @if(phoneControl?.getError('required')){ Phone is required}
+                        @else if(phoneControl?.getError('pattern')){ Phone must be 11 numbers begins with 010, 011, 012 and 015 }
+                    </app-errormessage>
+                } -->
+            </div>
+
+
+            <!-- ! City -->
+            <div class="card w-5/6 mx-auto my-6">
+                <label for="city" class="main text-sky-500 capitalize" [class]="{}" class="main text-sky-500 capitalize">city</label>
+                <input type="tel" formControlName="city" id="city" [class]="{}" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
+                <!-- @if (cityControl?.errors && cityControl?.touched) {
+                    <app-errormessage>
+                        @if(cityControl?.getError('required')){ city is required}
+                        @else if(cityControl?.getError('pattern')){ city must be 11 numbers begins with 010, 011, 012 and 015 }
+                    </app-errormessage>
+                } -->
+            </div>
+            
+            <button [disabled]="checkoutSessionForm.invalid || (isLoading | async)" class="w-5/6 cursor-pointer mx-auto flex justify-center gap-2 mt-7 rounded-xl text-zinc-100 main p-2 bg-sky-500 transitioned hover:bg-transparent hover:text-sky-500 border-2 hover:border-sky-500">
+            Submit
+            @if((isLoading | async)){
+                <lucide-angular [img]="loader"  class="animate-spin"></lucide-angular>
+            }
+        </button>
+        </div>
+    </form>
+</section>

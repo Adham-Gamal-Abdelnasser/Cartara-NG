@@ -31,6 +31,6 @@
         <p class="flex justify-between text-lg my-2"><span>items</span><span>{{userCartDetails().products.length}}</span></p>
         <hr/>
         <p class="flex justify-between text-lg"><span>total</span><span>{{userCartDetails().totalCartPrice}}</span></p>
-        <button class="bg-sky-500 w-full text-white p-2 rounded-full my-4 main border-2 border-transparent hover:text-sky-500 hover:bg-transparent hover:border-sky-500 transitioned cursor-pointer">purchase</button>
+        <button [routerLink]="['/checkout',userCartDetails()._id]" class="bg-sky-500 w-full text-white p-2 rounded-full my-4 main border-2 border-transparent hover:text-sky-500 hover:bg-transparent hover:border-sky-500 transitioned cursor-pointer">purchase</button>
     </div>
 </section>

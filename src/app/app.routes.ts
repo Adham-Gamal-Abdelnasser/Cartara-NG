@@ -18,7 +18,9 @@ export const routes: Routes = [
         {path: "brands", loadComponent:()=> import('./features/pages/brands/brands.component').then(c=>c.BrandsComponent)},
         {path: "cart", loadComponent:()=> import('./features/pages/cart/cart.component').then(c=>c.CartComponent)},
         {path: "wishlist", loadComponent:()=> import('./features/pages/wishlist/wishlist.component').then(c=>c.WishlistComponent)},
+        {path: "allOrders", loadComponent:()=> import('./features/pages/orders/orders.component').then(c=>c.OrdersComponent)},
         {path: "product-details/:id", loadComponent:()=> import('./shared/components/productdetails/productdetails.component').then(c=>c.ProductdetailsComponent)},
+        {path: "checkout/:id", loadComponent:()=> import('./features/pages/cart/components/checkout/checkout.component').then(c=>c.CheckoutComponent)},
         {path: "**", loadComponent:()=> import('./shared/components/notfound/notfound.component').then(c=>c.NotfoundComponent)},
     ]},
 ];
