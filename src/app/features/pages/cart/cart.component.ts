@@ -22,8 +22,6 @@ export class CartComponent {
   recieveUserCart():void {
       this._cartService.getLoggedUserCart().subscribe(res=>{
         this.userCartDetails.set(res.data)
-      },err=>{
-        this._toastrService.error(err.error.message)
       })
   }
 
@@ -31,24 +29,18 @@ export class CartComponent {
     this._cartService.removeSpecificCartItem(id).subscribe(res=>{
       this._toastrService.info(res.message)
       this.userCartDetails.set(res.data)
-    },err=> {
-      this._toastrService.error(err.error.message)
     })
   }
 
   updateItemCount(id:string, count:number):void{
     this._cartService.updateCartProductQuantity(id,count).subscribe(res=>{
       this.userCartDetails.set(res.data)
-    },err=>{
-      this._toastrService.error(err.error.message)
     })
   }
   
   clearCart():void {
     this._cartService.clearUserCart().subscribe(res=>{
       this.userCartDetails.set(res.data)
-    },err=>{
-      this._toastrService.error(err.error.message)
     })
   }
 

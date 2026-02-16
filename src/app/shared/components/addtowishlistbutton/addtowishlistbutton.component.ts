@@ -18,8 +18,6 @@ export class AddtowishlistbuttonComponent {
   sendProductToWishlist():void {
     this._wishlistService.addProductToWishlist(this.prdID()).subscribe(res=>{
       this._toastrService.info(res.message)
-    },err=>{
-      this._toastrService.error(err.error.message)
     })
   }
 

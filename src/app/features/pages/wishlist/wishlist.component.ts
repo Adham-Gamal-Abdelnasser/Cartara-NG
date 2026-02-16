@@ -21,9 +21,6 @@ export class WishlistComponent {
     this._wishlistService.getLoggedUserWishlist().subscribe(res=>{
       console.log(res);
       this.wishProducts.set(res.data)
-    },err=>{
-      console.log(err)
-      this._toastrService.error(err.error.message);
     })
   }
 
@@ -31,8 +28,6 @@ export class WishlistComponent {
     this._wishlistService.removeProductFromWishlist(id).subscribe(res=>{
       this.wishProducts.set(res.data)
       this._toastrService.info(res.message)
-    },err=>{
-      this._toastrService.error(err.error.message)
     })
   }
 

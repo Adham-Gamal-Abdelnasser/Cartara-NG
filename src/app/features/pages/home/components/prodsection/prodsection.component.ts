@@ -1,7 +1,6 @@
-import { Component, inject, signal, Signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ProductcardComponent } from "../../../../../shared/components/productcard/productcard.component";
 import { ProductsService } from '../../../../../core/services/products/products.service';
-import { IProduct } from '../../../../../shared/models/product/iproduct.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 

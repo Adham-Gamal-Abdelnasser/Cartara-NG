@@ -74,10 +74,6 @@ export class SignupComponent {
         })
         localStorage.setItem('userToken', res.token)
 
-      },err=>{
-        this._toastrService.error(err.error.message, 'Error' , {
-          progressBar: true,
-        })
       })
     }else {
       this.signUpForm.markAllAsTouched()

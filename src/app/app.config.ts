@@ -7,6 +7,7 @@ import Aura from '@primeuix/themes/aura';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { headersInterceptor } from './core/interceptors/headers/headers-interceptor';
+import { errorsInterceptor } from './core/interceptors/errors/errors-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +19,7 @@ export const appConfig: ApplicationConfig = {
         options: { darkModeSelector: false || 'none' }
       }
     }),
-    provideHttpClient(withFetch(),withInterceptors([headersInterceptor ])),
+    provideHttpClient(withFetch(),withInterceptors([headersInterceptor, errorsInterceptor])),
     provideToastr(),
 
   ]

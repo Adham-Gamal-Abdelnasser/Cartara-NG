@@ -26,10 +26,7 @@ export class AddtocartbuttonComponent {
       console.log(res)
       this._toastrService.info(res.message)
     
-    },err=>{
-        this._toastrService.error(err.error.message)
-        console.log(err)
-      })
+    })
     
   }
 }

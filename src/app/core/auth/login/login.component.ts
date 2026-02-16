@@ -60,10 +60,6 @@ export class LoginComponent {
           })
           localStorage.setItem('userToken', res.token)
           this._authService.checkIsLoggedIn()
-        },err=>{
-          this._toastrService.error(err.error.message, 'Error' , {
-            progressBar: true,
-          })
         })
       }else {
         this.logInForm.markAllAsTouched()
