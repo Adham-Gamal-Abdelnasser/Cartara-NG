@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { ICartResult } from '../../../shared/models/cartresult/icartresult.interface';
@@ -9,6 +9,7 @@ import { ICartResult } from '../../../shared/models/cartresult/icartresult.inter
   providedIn: 'root',
 })
 export class CartService {
+  cartCount:WritableSignal<number> = signal<number>(0)
   private readonly _httpClient = inject(HttpClient);
   
   addProducttoCart(productId:string):Observable<ICartResult>{

@@ -28,18 +28,21 @@ export class CartComponent {
   deleteProduct(id:string):void {
     this._cartService.removeSpecificCartItem(id).subscribe(res=>{
       this._toastrService.info(res.message)
+      this._cartService.cartCount.set(res.numOfCartItems)
       this.userCartDetails.set(res.data)
     })
   }
 
   updateItemCount(id:string, count:number):void{
     this._cartService.updateCartProductQuantity(id,count).subscribe(res=>{
+      this._cartService.cartCount.set(res.numOfCartItems)
       this.userCartDetails.set(res.data)
     })
   }
   
   clearCart():void {
     this._cartService.clearUserCart().subscribe(res=>{
+      this._cartService.cartCount.set(res.numOfCartItems)
       this.userCartDetails.set(res.data)
     })
   }
