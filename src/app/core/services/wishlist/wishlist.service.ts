@@ -1,16 +1,25 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { IWishAddingResult, IWishResult } from '../../../shared/models/wishresult/iwishresult.interface';
+import { IHeaders } from '../../../shared/models/headers/iheaders.interface';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WishlistService {
   private readonly _httpClient = inject(HttpClient)
-  wishlistHeaders:{headers:{token:string}} = {headers:{token:localStorage.getItem("userToken")!}}
-
+  private readonly _platform_ID = inject(PLATFORM_ID)
+  wishlistHeaders:IHeaders={} as IHeaders;
+    constructor(){
+      if (isPlatformBrowser(this._platform_ID)) {
+        this.wishlistHeaders = {
+          headers: {token: localStorage.getItem("userToken")!}
+        }
+      }
+    }
   getLoggedUserWishlist():Observable<IWishResult> {
     return this._httpClient.get<IWishResult>(`${environment.apiUrl}wishlist`,this.wishlistHeaders);
   }

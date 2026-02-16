@@ -10,6 +10,8 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
     const token = localStorage.getItem("userToken")!
     if (token) {
       return _router.parseUrl('/home')
+    } else {
+      return true
     }
   }
   return true

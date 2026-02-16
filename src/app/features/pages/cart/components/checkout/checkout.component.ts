@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-checkout',
-  imports: [ReactiveFormsModule, LetterComponent, LucideAngularModule,AsyncPipe],
+  imports: [ReactiveFormsModule, LetterComponent, LucideAngularModule, AsyncPipe, ErrormessageComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })
@@ -49,10 +49,8 @@ export class CheckoutComponent {
       console.log(this.cartID());
       this.isLoading.next(true)
       this._paymentService.checkoutSession(this.cartID(),this.checkoutSessionForm.value).pipe(finalize(()=>{this.isLoading.next(false)})).subscribe(res=>{
-        console.log(res)
         window.open(res.session.url)
       },err=>{
-        console.log(err)
         this._toastrService.error(err.error.message)
       })
       
