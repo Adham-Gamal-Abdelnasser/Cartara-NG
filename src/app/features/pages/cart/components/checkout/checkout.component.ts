@@ -45,8 +45,6 @@ export class CheckoutComponent {
 
   submitCheckoutSessionForm():void {
     if (this.checkoutSessionForm.valid) {
-      console.log(this.checkoutSessionForm.value);
-      console.log(this.cartID());
       this.isLoading.next(true)
       this._paymentService.checkoutSession(this.cartID(),this.checkoutSessionForm.value).pipe(finalize(()=>{this.isLoading.next(false)})).subscribe(res=>{
         window.open(res.session.url)

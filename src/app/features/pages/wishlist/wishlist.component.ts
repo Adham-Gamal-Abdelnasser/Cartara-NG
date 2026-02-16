@@ -1,8 +1,9 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, inject, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
 import { WishitemComponent } from "./components/wishitem/wishitem.component";
 import { WishlistService } from '../../../core/services/wishlist/wishlist.service';
 import { ToastrService } from 'ngx-toastr';
 import { IProduct } from '../../../shared/models/product/iproduct.interface';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-wishlist',
@@ -13,6 +14,7 @@ import { IProduct } from '../../../shared/models/product/iproduct.interface';
 export class WishlistComponent {
   private readonly _wishlistService = inject(WishlistService)
   private readonly _toastrService = inject(ToastrService)
+  private readonly _platform_ID = inject(PLATFORM_ID)
   wishProducts: WritableSignal<IProduct[]> = signal<IProduct[]>([])
 
   recieveWishProducts():void {
@@ -35,6 +37,8 @@ export class WishlistComponent {
   }
 
   ngOnInit():void {
-    this.recieveWishProducts();
+    if (localStorage.getItem('userToken') && isPlatformBrowser(this._platform_ID)) {
+      this.recieveWishProducts();
+    }
   }
 }

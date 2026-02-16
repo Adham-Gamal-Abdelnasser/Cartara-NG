@@ -4,8 +4,9 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
+import { headersInterceptor } from './core/interceptors/headers/headers-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +18,7 @@ export const appConfig: ApplicationConfig = {
         options: { darkModeSelector: false || 'none' }
       }
     }),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(),withInterceptors([headersInterceptor ])),
     provideToastr(),
 
   ]

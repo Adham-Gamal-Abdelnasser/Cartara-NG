@@ -8,10 +8,9 @@ import { IPaymentResponse } from '../../../shared/models/payment/ipayment.interf
   providedIn: 'root',
 })
 export class PaymentService {
-  paymentHeaders:{headers:{token:string}} = {headers:{token:localStorage.getItem("userToken")!}}
   private readonly _httpClient = inject(HttpClient)
 
   checkoutSession(cartId:string | null, checkoutData:object):Observable<IPaymentResponse> {
-    return this._httpClient.post<IPaymentResponse>(`${environment.apiUrl}orders/checkout-session/${cartId}?url=http://localhost:4200`, checkoutData, this.paymentHeaders)
+    return this._httpClient.post<IPaymentResponse>(`${environment.apiUrl}orders/checkout-session/${cartId}?url=http://localhost:4200`, checkoutData)
   }
 }

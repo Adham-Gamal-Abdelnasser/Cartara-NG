@@ -11,24 +11,16 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class WishlistService {
   private readonly _httpClient = inject(HttpClient)
-  private readonly _platform_ID = inject(PLATFORM_ID)
-  wishlistHeaders:IHeaders={} as IHeaders;
-    constructor(){
-      if (isPlatformBrowser(this._platform_ID)) {
-        this.wishlistHeaders = {
-          headers: {token: localStorage.getItem("userToken")!}
-        }
-      }
-    }
+  
   getLoggedUserWishlist():Observable<IWishResult> {
-    return this._httpClient.get<IWishResult>(`${environment.apiUrl}wishlist`,this.wishlistHeaders);
+    return this._httpClient.get<IWishResult>(`${environment.apiUrl}wishlist`);
   }
 
   removeProductFromWishlist(id:string):Observable<any> {
-    return this._httpClient.delete(`${environment.apiUrl}wishlist/${id}`,this.wishlistHeaders)
+    return this._httpClient.delete(`${environment.apiUrl}wishlist/${id}`)
   }
 
   addProductToWishlist(productId:string):Observable<IWishAddingResult> {
-    return this._httpClient.post<IWishAddingResult>(`${environment.apiUrl}wishlist`,{productId},this.wishlistHeaders)
+    return this._httpClient.post<IWishAddingResult>(`${environment.apiUrl}wishlist`,{productId})
   }
 }

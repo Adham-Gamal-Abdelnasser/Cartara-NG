@@ -1,10 +1,11 @@
-import { Component, WritableSignal, inject, signal } from '@angular/core';
+import { Component, PLATFORM_ID, WritableSignal, inject, signal } from '@angular/core';
 import { LucideAngularModule, Trash2Icon } from 'lucide-angular';
 import { CartService } from '../../../core/services/cart/cart.service';
 import { CartData } from '../../../shared/models/cartresult/icartresult.interface';
 import { ToastrService } from 'ngx-toastr';
 import { CartitemComponent } from './components/cartitem/cartitem.component';
 import { RouterLink } from "@angular/router";
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
@@ -17,6 +18,7 @@ export class CartComponent {
   userCartDetails: WritableSignal<CartData> = signal<CartData>({} as CartData)
   private readonly _cartService = inject(CartService)
   private readonly _toastrService = inject(ToastrService)
+  private readonly _platform_ID = inject(PLATFORM_ID)
   recieveUserCart():void {
       this._cartService.getLoggedUserCart().subscribe(res=>{
         this.userCartDetails.set(res.data)
@@ -51,6 +53,8 @@ export class CartComponent {
   }
 
   ngOnInit():void {
-    this.recieveUserCart()
+    if (localStorage.getItem('userToken') && isPlatformBrowser(this._platform_ID)) {
+      this.recieveUserCart()
+    }
   }
 }
