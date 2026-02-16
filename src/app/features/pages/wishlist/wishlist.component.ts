@@ -26,14 +26,17 @@ export class WishlistComponent {
 
   deleteWishProduct(id:string):void {
     this._wishlistService.removeProductFromWishlist(id).subscribe(res=>{
-      this.wishProducts.set(res.data)
+      this.recieveWishProducts();
+      this._wishlistService.wishlistCount.set(this._wishlistService.wishlistCount()-1)
       this._toastrService.info(res.message)
     })
   }
 
   ngOnInit():void {
-    if (localStorage.getItem('userToken') && isPlatformBrowser(this._platform_ID)) {
-      this.recieveWishProducts();
+    if (isPlatformBrowser(this._platform_ID)) {
+      if (localStorage.getItem('userToken') ) { 
+        this.recieveWishProducts();
+      }
     }
   }
 }

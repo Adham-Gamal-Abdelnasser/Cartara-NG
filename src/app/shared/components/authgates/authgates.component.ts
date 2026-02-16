@@ -6,6 +6,7 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { CartService } from '../../../core/services/cart/cart.service';
 import { isPlatformBrowser } from '@angular/common';
+import { WishlistService } from '../../../core/services/wishlist/wishlist.service';
 
 @Component({
   selector: 'app-authgates',
@@ -19,8 +20,10 @@ export class AuthgatesComponent {
   @Input({required: true}) isLogged!:boolean //todo recieve isLogged from navbar component that have "isUser" whether true from  userLayout or false from guestLayout
   private readonly _authService = inject(AuthService)
   private readonly _cartService = inject(CartService)
+  private readonly _wishlistService = inject(WishlistService)
   private readonly _platform_ID = inject(PLATFORM_ID)
   cartItemsCount:Signal<number> = computed(()=> this._cartService.cartCount()) 
+  wishlistItemsCount:Signal<number> = computed(()=> this._wishlistService.wishlistCount()) 
   readonly cart:LucideIconData = ShoppingCartIcon 
   gates: Array<INavigationLink> =[
     {name: "Log in", path: "/login", id: 0},
@@ -33,6 +36,7 @@ export class AuthgatesComponent {
     if (isPlatformBrowser(this._platform_ID)) {
       if (localStorage.getItem('userToken')) { 
         this.recieveCartData()
+        this.recieveWishlistData()
       }
     }
   }
@@ -40,6 +44,12 @@ export class AuthgatesComponent {
   recieveCartData():void {
     this._cartService.getLoggedUserCart().subscribe(res =>{
       this._cartService.cartCount.set(res.numOfCartItems)
+    })
+  }
+
+  recieveWishlistData():void {
+    this._wishlistService.getLoggedUserWishlist().subscribe(res =>{
+      this._wishlistService.wishlistCount.set(res.count)
     })
   }
 }

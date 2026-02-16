@@ -17,6 +17,7 @@ export class AddtowishlistbuttonComponent {
 
   sendProductToWishlist():void {
     this._wishlistService.addProductToWishlist(this.prdID()).subscribe(res=>{
+      this._wishlistService.wishlistCount.set(this._wishlistService.wishlistCount() + 1)
       this._toastrService.info(res.message)
     })
   }
