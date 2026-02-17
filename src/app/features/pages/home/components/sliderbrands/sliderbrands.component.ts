@@ -13,7 +13,7 @@ import { CarouselModule } from 'primeng/carousel';
 export class SliderbrandsComponent {
   private readonly _brandsSerice = inject(BrandsService)
   brands:WritableSignal<IBrand[]> = signal<IBrand[]>([])
-  responsiveOptions: IPrimeOption[] | undefined;
+  responsiveOptions: IPrimeOption[]=[]
   recieveAllBrands():void {
     this._brandsSerice.getAllBrands().subscribe(res=>{
       this.brands.set(res.data)

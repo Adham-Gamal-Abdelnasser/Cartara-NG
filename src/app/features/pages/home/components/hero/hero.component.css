@@ -1,0 +1,10 @@
+:host ::ng-deep .p-button {
+    display: none !important;
+}
+/* :host ::ng-deep .p-carousel-indicator-list li.p-carousel-indicator button {
+    background-color: #00a6f4;
+} */
+:host ::ng-deep .p-carousel-indicators-list .p-carousel-indicator button {
+    background-color: #00a6f4 !important;
+
+}

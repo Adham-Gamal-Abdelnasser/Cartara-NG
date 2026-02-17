@@ -1,12 +1,7 @@
-<header  class="m-4 rounded-2xl shadow-xl overflow-hidden">
-    <swiper-container navigation="true" centeredSlides="true" loop="true" pagination="{ hideOnClick: true }">
-
-      <swiper-slide>
-        <img src="/2.jpg" class="full/2 " alt="">
-      </swiper-slide>
-      <swiper-slide>
-        <img src="/1.jpg" class="w-full " alt="">
-      </swiper-slide>
-
-    </swiper-container>
+<header class="card m-4">
+    <p-carousel [value]="sliderImages()" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="7000">
+        <ng-template let-brand #item >
+              <img [src]="brand.image" [alt]="brand.name" class="w-full rounded-2xl" />
+        </ng-template>
+    </p-carousel>
 </header>

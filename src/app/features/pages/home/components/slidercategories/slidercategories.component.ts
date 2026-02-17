@@ -15,7 +15,7 @@ import { IPrimeOption } from '../../../../../shared/models/primeoption/iprimeopt
 export class SlidercategoriesComponent {
   private readonly _categoriesService = inject(CategoriesService)
   categories:WritableSignal<ICategory[]>=signal<ICategory[]>([])
-  responsiveOptions: IPrimeOption[] | undefined;
+  responsiveOptions: IPrimeOption[]=[];
 
   recieveAllCategories():void {
     this._categoriesService.getAllCategories().subscribe(res=>{
