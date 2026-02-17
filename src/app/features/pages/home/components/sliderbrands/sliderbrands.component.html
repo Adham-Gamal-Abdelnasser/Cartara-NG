@@ -1,0 +1,14 @@
+<section class="card m-4">
+    <p-carousel [value]="brands()" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="5000">
+        <ng-template let-brand #item >
+            <div class="m-2  flex flex-col items-center w-fit">
+                <div class="mb-4 w-full">
+                    <div class="rounded-2xl overflow-hidden h-40">
+                        <img [src]="brand.image" [alt]="brand.name" class="w-full" />
+                    </div>
+                </div>
+                <div class="mb-4 text-center main">{{ brand.name }}</div>
+            </div>
+        </ng-template>
+    </p-carousel>
+</section>

@@ -1,25 +1,22 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
-import { CategoriesService } from '../../../../../core/services/categories/categories.service';
-import { ICategory } from '../../../../../shared/models/category/icategory.interface';
+import { BrandsService } from '../../../../../core/services/brands/brands.service';
+import { IBrand } from '../../../../../shared/models/brand/ibrand.interface';
+import { IPrimeOption } from '../../../../../shared/models/primeoption/iprimeoption.interface';
 import { CarouselModule } from 'primeng/carousel';
 
-import { IPrimeOption } from '../../../../../shared/models/primeoption/iprimeoption.interface';
-
 @Component({
-  selector: 'app-slidercategories',
+  selector: 'app-sliderbrands',
   imports: [CarouselModule],
-  templateUrl: './slidercategories.component.html',
-  styleUrl: './slidercategories.component.css',
-
+  templateUrl: './sliderbrands.component.html',
+  styleUrl: './sliderbrands.component.css',
 })
-export class SlidercategoriesComponent {
-  private readonly _categoriesService = inject(CategoriesService)
-  categories:WritableSignal<ICategory[]>=signal<ICategory[]>([])
+export class SliderbrandsComponent {
+  private readonly _brandsSerice = inject(BrandsService)
+  brands:WritableSignal<IBrand[]> = signal<IBrand[]>([])
   responsiveOptions: IPrimeOption[] | undefined;
-
-  recieveAllCategories():void {
-    this._categoriesService.getAllCategories().subscribe(res=>{
-      this.categories.set(res.data)
+  recieveAllBrands():void {
+    this._brandsSerice.getAllBrands().subscribe(res=>{
+      this.brands.set(res.data)
     })
   }
   initiateResponsiveOptions():void {
@@ -46,14 +43,9 @@ export class SlidercategoriesComponent {
             }
         ];
   }
-  ngOnInit() {
+
+  ngOnInit():void {
     this.initiateResponsiveOptions()
-    this.recieveAllCategories()
+    this.recieveAllBrands()
   }
-
-    
-
-
-
-
 }
