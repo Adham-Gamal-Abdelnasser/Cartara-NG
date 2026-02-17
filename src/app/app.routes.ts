@@ -14,6 +14,7 @@ export const routes: Routes = [
     ] },
     {path: "", component: UserlayoutComponent, canActivate:[authGuard],children: [
         {path: "home", component: HomeComponent},
+        {path: "store", loadComponent:()=> import('./features/pages/store/store.component').then(c=>c.StoreComponent)},
         {path: "categories", loadComponent:()=> import('./features/pages/categories/categories.component').then(c=>c.CategoriesComponent)},
         {path: "brands", loadComponent:()=> import('./features/pages/brands/brands.component').then(c=>c.BrandsComponent)},
         {path: "cart", loadComponent:()=> import('./features/pages/cart/cart.component').then(c=>c.CartComponent)},

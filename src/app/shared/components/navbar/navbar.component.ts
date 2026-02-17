@@ -22,8 +22,9 @@ export class NavbarComponent {
   //todo nav links
   navLinks: INavigationLink[] = [
     {name: 'Home', path: '/home', id: 0},
-    {name: 'Categories', path: '/categories', id: 2},
-    {name: 'Brands', path: '/brands', id: 3},
+    {name: 'Store', path: '/store', id: 2},
+    // {name: 'Categories', path: '/categories', id: 3},
+    // {name: 'Brands', path: '/brands', id: 4},
   ]  
   //todo toggle navbar by flag and make icons catched toggle
   toggleNav() :void {

@@ -1,0 +1,29 @@
+<section class="m-4 grid grid-cols-1 lg:grid-cols-6 gap-2">
+    <div class="bg-neutral-700 text-gray-400 main rounded-2xl p-5 col-span-full lg:col-span-1 h-fit overflow-auto">
+        <h2 (click)="recieveProducts()" class="text-sky-500 text-xl mb-2">All Products</h2>
+        <h2 class="text-sky-500 text-xl mb-2">Filter By</h2>
+        <h3 class="text-lg mt-3">____<app-letter>S</app-letter>ort <app-letter>P</app-letter>rice</h3>
+        <ul>
+            <li (click)="specifySortingOption('-price')" class="cursor-pointer">High to Low</li>
+            <li (click)="specifySortingOption('price')" class="cursor-pointer">Low to High</li>
+        </ul>
+        <h3 class="text-lg mt-3">____<app-letter>C</app-letter>ategories</h3>
+        @for (cat of categoryList(); track cat._id) {
+            <p (click)="recieveProducts(cat._id)" class="cursor-pointer">{{cat.name}}</p>
+            
+        }
+        <!-- <h3 class="text-lg mt-3">____<app-letter>B</app-letter>rands</h3>
+        @for (brand of brandList(); track brand._id) {
+            <p class="cursor-pointer">{{brand.name}}</p>
+            
+        } -->
+        
+    </div>
+    <div class="bg-gray-200 rounded-2xl p-5 col-span-full lg:col-span-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        @for(prd of productList(); track prd._id){
+            <app-productcard [product]="prd"></app-productcard>
+        }@empty {
+            <p class="main text-neutral-700">No products found</p>
+        }
+    </div>
+</section>
