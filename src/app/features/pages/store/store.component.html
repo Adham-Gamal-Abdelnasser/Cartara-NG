@@ -30,5 +30,10 @@
         }@empty {
             <p class="main text-neutral-700">No products found</p>
         }
+        @if (productList().length > 0) {
+            <div class="mt-10 col-span-full flex justify-center ">
+                <p-paginator (onPageChange)="onPageChange($event)" [first]="first()" [rows]="rowsPerPage()" [totalRecords]="totalRecords()" class="rounded-full bg-blue-500 shadow-lg shadow-sky-500" />
+            </div>
+        }
     </div>
 </section>

@@ -8,10 +8,12 @@ import { LetterComponent } from "../../../shared/components/letter/letter.compon
 import { IProduct } from '../../../shared/models/product/iproduct.interface';
 import { ProductsService } from '../../../core/services/products/products.service';
 import { ProductcardComponent } from "../../../shared/components/productcard/productcard.component";
+import { PaginatorModule, Paginator, PaginatorState } from 'primeng/paginator';
+
 
 @Component({
   selector: 'app-store',
-  imports: [LetterComponent, ProductcardComponent],
+  imports: [LetterComponent, ProductcardComponent, Paginator],
   templateUrl: './store.component.html',
   styleUrl: './store.component.css',
 })
@@ -21,6 +23,10 @@ export class StoreComponent {
   productList:WritableSignal<IProduct[]> = signal<IProduct[]>([])
   categoryID = signal<string|undefined>(undefined) 
   currentSort = signal<'price' | '-price'>('price')
+  totalRecords= signal<number>(0)
+  rowsPerPage = signal<number>(12)
+  currentPage = signal<number>(1)
+  first = signal<number>(0)
   private readonly _categoriesService = inject(CategoriesService) 
   private readonly _brandsService = inject(BrandsService)
   private readonly _productsService = inject(ProductsService)
@@ -42,6 +48,7 @@ export class StoreComponent {
   recieveProducts(cateId?:string, page?:number, sort:'price' | '-price' = 'price'):void {
     this._productsService.setGetProducts(cateId, page, sort).subscribe(res=>{
       this.productList.set(res.data)
+      this.totalRecords.set(res.results)
       if (cateId) {
         this.categoryID.set(cateId)
       }
@@ -52,9 +59,12 @@ export class StoreComponent {
     this._activatedRoute.queryParams.subscribe(params=> {
       const catID = params["categoryId"] || undefined
       const sort = params["sort"] || "price"
+      const page = params["page"] ? parseInt(params["page"]) : 1
       this.categoryID.set(catID)
       this.currentSort.set(sort)
-      this.recieveProducts(catID,undefined,sort)
+      this.currentPage.set(page)
+      this.first.set((page - 1) * this.rowsPerPage())
+      this.recieveProducts(catID,page,sort)
     })
   }
 
@@ -68,17 +78,22 @@ export class StoreComponent {
 
   sortProducts(event: Event):void {
     const sortingOption = (event.target as HTMLSelectElement).value
-    this.changeURL({sort: sortingOption})
+    this.changeURL({sort: sortingOption, page: 1})
   }
 
   filterByCategory(catID?:string):void {
-    this.changeURL({categoryId: catID})
+    this.changeURL({categoryId: catID, page: 1})
+  }
+
+  onPageChange(e: PaginatorState):void {
+    const page = (e.page ?? 0)+1
+    this.changeURL({page})
   }
 
   ngOnInit():void {
-    this.setURLParams()
+    this.recieveProducts()
     this.recieveBrands()
     this.recieveCategories()
-    this.recieveProducts()
+    this.setURLParams()
   }
 }
