@@ -1,7 +1,7 @@
 <section class="card m-4">
     <p-carousel [value]="categories()" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
         <ng-template let-cat #item >
-            <div class="m-2  flex flex-col items-center w-fit">
+            <div (click)="navigateToCategory(cat._id)" class="m-2 cursor-pointer flex flex-col items-center w-fit">
                 <div class="mb-4 w-full">
                     <div class="rounded-2xl overflow-hidden h-40">
                         <img [src]="cat.image" [alt]="cat.name" class="w-full" />

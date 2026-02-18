@@ -1,15 +1,20 @@
 <section class="m-4 grid grid-cols-1 lg:grid-cols-6 gap-2">
     <div class="bg-neutral-700 text-gray-400 main rounded-2xl p-5 col-span-full lg:col-span-1 h-fit overflow-auto">
-        <h2 (click)="recieveProducts()" class="text-sky-500 text-xl mb-2">All Products</h2>
+        <h2 (click)="filterByCategory()" class="cursor-pointer text-xl mb-2 text-center" [class]="!categoryID() ? 'text-sky-500' : 'text-gray-400' ">All Products</h2>
         <h2 class="text-sky-500 text-xl mb-2">Filter By</h2>
-        <h3 class="text-lg mt-3">____<app-letter>S</app-letter>ort <app-letter>P</app-letter>rice</h3>
-        <ul>
-            <li (click)="specifySortingOption('-price')" class="cursor-pointer">High to Low</li>
-            <li (click)="specifySortingOption('price')" class="cursor-pointer">Low to High</li>
-        </ul>
-        <h3 class="text-lg mt-3">____<app-letter>C</app-letter>ategories</h3>
+        <h3 class="text-lg mt-3">
+            <app-letter>S</app-letter>ort
+            <app-letter>B</app-letter>y
+            <app-letter>P</app-letter>rice
+        </h3>
+        <select [value]="currentSort()" (change)="sortProducts($event)" class="bg-neutral-700 pe-3 py-1 rounded-xl border-sky-500 outline-none">
+            <option class="rounded-xl" value="price">Low To High</option>
+            <option class="rounded-xl" value="-price">High To Low</option>
+        </select>
+        <hr>
+        <h3 class="text-lg mt-3 text-center"><app-letter>C</app-letter>ategories</h3>
         @for (cat of categoryList(); track cat._id) {
-            <p (click)="recieveProducts(cat._id)" class="cursor-pointer">{{cat.name}}</p>
+            <p (click)="filterByCategory(cat._id)" class="cursor-pointer" [class]="categoryID() == cat._id ? 'text-sky-500' : 'text-gray-400' ">{{cat.name}}</p>
             
         }
         <!-- <h3 class="text-lg mt-3">____<app-letter>B</app-letter>rands</h3>

@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { ICategory } from '../../../shared/models/category/icategory.interface';
 import { IBrand } from '../../../shared/models/brand/ibrand.interface';
@@ -19,9 +20,13 @@ export class StoreComponent {
   brandList:WritableSignal<IBrand[]> = signal<IBrand[]>([])
   productList:WritableSignal<IProduct[]> = signal<IProduct[]>([])
   categoryID = signal<string|undefined>(undefined) 
+  currentSort = signal<'price' | '-price'>('price')
   private readonly _categoriesService = inject(CategoriesService) 
   private readonly _brandsService = inject(BrandsService)
   private readonly _productsService = inject(ProductsService)
+  private readonly _activatedRoute = inject(ActivatedRoute)
+  private readonly _router = inject(Router)
+
   recieveCategories():void {
     this._categoriesService.getAllCategories().subscribe(res=>{
       this.categoryList.set(res.data)
@@ -43,11 +48,35 @@ export class StoreComponent {
     })
   }
 
-  specifySortingOption(sorting:'price' | '-price'):void {
-    this.recieveProducts(this.categoryID(),undefined,sorting)
+  setURLParams():void {
+    this._activatedRoute.queryParams.subscribe(params=> {
+      const catID = params["categoryId"] || undefined
+      const sort = params["sort"] || "price"
+      this.categoryID.set(catID)
+      this.currentSort.set(sort)
+      this.recieveProducts(catID,undefined,sort)
+    })
+  }
+
+  changeURL(params:any):void {
+    this._router.navigate([] , {
+      relativeTo: this._activatedRoute,
+      queryParams: params,
+      queryParamsHandling: "merge",
+    })
+  }
+
+  sortProducts(event: Event):void {
+    const sortingOption = (event.target as HTMLSelectElement).value
+    this.changeURL({sort: sortingOption})
+  }
+
+  filterByCategory(catID?:string):void {
+    this.changeURL({categoryId: catID})
   }
 
   ngOnInit():void {
+    this.setURLParams()
     this.recieveBrands()
     this.recieveCategories()
     this.recieveProducts()

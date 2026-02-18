@@ -4,6 +4,7 @@ import { ICategory } from '../../../../../shared/models/category/icategory.inter
 import { CarouselModule } from 'primeng/carousel';
 
 import { IPrimeOption } from '../../../../../shared/models/primeoption/iprimeoption.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-slidercategories',
@@ -14,6 +15,7 @@ import { IPrimeOption } from '../../../../../shared/models/primeoption/iprimeopt
 })
 export class SlidercategoriesComponent {
   private readonly _categoriesService = inject(CategoriesService)
+  private readonly _router = inject(Router)
   categories:WritableSignal<ICategory[]>=signal<ICategory[]>([])
   responsiveOptions: IPrimeOption[]=[];
 
@@ -51,9 +53,8 @@ export class SlidercategoriesComponent {
     this.recieveAllCategories()
   }
 
-    
-
-
-
+  navigateToCategory(catID:string):void {
+    this._router.navigate(["store"],{queryParams: {categoryId: catID}})
+  }
 
 }
