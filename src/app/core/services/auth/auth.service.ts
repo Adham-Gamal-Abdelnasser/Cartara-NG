@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { ISignUp, SignUpData } from '../../../shared/models/signup/isignup.interface';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-  decodedUser:IDecodedUser = {} as IDecodedUser;
+  decodedUser:WritableSignal<IDecodedUser> = signal<IDecodedUser>({} as IDecodedUser)
   private readonly _httpClient = inject(HttpClient)
   private readonly _platform_id = inject(PLATFORM_ID)
   private readonly _router = inject(Router)
@@ -38,7 +38,7 @@ export class AuthService {
       const token = localStorage.getItem("userToken");
       this.isLoggedIn$.next(true)
       if(token){
-        this.decodedUser = jwtDecode(token)
+        this.decodedUser.set(jwtDecode(token))
         this.isLoggedIn$.next(false)
         return;
       }

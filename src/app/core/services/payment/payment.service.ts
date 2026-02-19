@@ -12,7 +12,10 @@ export class PaymentService {
 
   checkoutSession(cartId:string | null, checkoutData:object):Observable<IPaymentResponse> {
     const returnURL= window.location.origin
-    return this._httpClient.post<IPaymentResponse>(`${environment.apiUrl}orders/checkout-session/${cartId}?url=http://localhost:4200`, checkoutData)
-    // return this._httpClient.post<IPaymentResponse>(`${environment.apiUrl}orders/checkout-session/${cartId}?url=${returnURL}`, checkoutData)
+    return this._httpClient.post<IPaymentResponse>(`${environment.apiUrl}orders/checkout-session/${cartId}?url=${returnURL}`, checkoutData)
+  }
+
+  getUserOrders(id:string):Observable<any> {
+    return this._httpClient.get<any>(`${environment.apiUrl}orders/user/${id}`)
   }
 }

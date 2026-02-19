@@ -1,5 +1,5 @@
 <section class="m-4 grid grid-cols-1 lg:grid-cols-6 gap-2">
-    <div class="bg-neutral-700 text-gray-400 main rounded-2xl p-5 col-span-full lg:col-span-1 h-fit overflow-auto">
+    <aside class="bg-neutral-700 text-gray-400 main rounded-2xl p-5 col-span-full lg:col-span-1 h-fit overflow-auto">
         <h2 (click)="filterByCategory()" class="cursor-pointer text-xl mb-2 text-center" [class]="!categoryID() ? 'text-sky-500' : 'text-gray-400' ">All Products</h2>
         <h2 class="text-sky-500 text-xl mb-2">Filter By</h2>
         <h3 class="text-lg mt-3">
@@ -17,13 +17,9 @@
             <p (click)="filterByCategory(cat._id)" class="cursor-pointer" [class]="categoryID() == cat._id ? 'text-sky-500' : 'text-gray-400' ">{{cat.name}}</p>
             
         }
-        <!-- <h3 class="text-lg mt-3">____<app-letter>B</app-letter>rands</h3>
-        @for (brand of brandList(); track brand._id) {
-            <p class="cursor-pointer">{{brand.name}}</p>
-            
-        } -->
+
         
-    </div>
+    </aside>
     <div class="bg-gray-200 rounded-2xl p-5 col-span-full lg:col-span-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         @for(prd of productList(); track prd._id){
             <app-productcard [product]="prd"></app-productcard>
