@@ -1,0 +1,18 @@
+<div [routerLink]="['/product-details/',orderItemInformation().product._id]" class="mb-4 p-4 flex items-center justify-center cursor-pointer">
+        <p-card [style]="{ width: '10rem', overflow: 'hidden', position: 'relative' }" >
+            <ng-template #header>
+                <img [alt]="orderItemInformation().product.title" [src]="orderItemInformation().product.imageCover"/>
+            </ng-template>
+            <div>
+                <div class="flex justify-between mb-2">
+                    <h2 class="main line-clamp-1">{{orderItemInformation().product.title}}</h2>
+                    <p class="main">{{orderItemInformation().price}}</p> 
+                </div>
+                <p class="line-clamp-2">{{orderItemInformation().product.category.name}}</p>
+                <div class="flex justify-between my-2">
+                    <p class="badge main">{{orderItemInformation().product.brand.name}}</p>
+                    <p class="flex main">{{orderItemInformation().product.ratingsAverage}}<lucide-angular [img]="star" class="text-amber-300"></lucide-angular></p>
+                </div>
+            </div>
+        </p-card>
+</div>

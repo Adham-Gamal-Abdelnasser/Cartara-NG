@@ -1,4 +1,4 @@
-<div class="border-2 border-sky-500 main relative px-10 md:px-4 pt-12 pb-2 rounded-2xl my-1 cursor-pointer text-gray-400 group transitioned hover:bg-sky-500">
+<div (click)="emitOrderToOrdersComponent()" class="border-2 border-sky-500 main relative px-10 md:px-4 pt-12 pb-2 rounded-2xl my-1 cursor-pointer text-gray-400 group transitioned hover:bg-sky-500">
     <span class="bg-sky-500 rounded-full centered w-5 h-5 md:p-0 md:w-8 md:h-8 text-white text-sm absolute top-2 start-2 transitioned group-hover:bg-neutral-700">{{count() + 1}}</span>
     <span class="rounded-full md:py-1 px-2 text-xs border border-sky-500 text-sky-500 absolute top-2 end-2 transitioned group-hover:bg-sky-500 group-hover:text-neutral-700 group-hover:border-neutral-700">{{navOrder().isDelivered ? 'Delivered' : 'not delivered yet'}}</span>
     <p class="transitioned group-hover:text-neutral-700">{{navOrder().createdAt | date:'d MMM y / hh:mm:ss a'}}</p>

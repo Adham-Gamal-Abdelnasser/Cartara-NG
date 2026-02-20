@@ -1,10 +1,10 @@
 <section class="m-4 grid grid-cols-4 gap-2">
     <aside class="col-span-full md:col-span-1 flex md:block gap-3 rounded-2xl bg-neutral-700 p-3 overflow-auto md:h-screen">
         @for (order of orders(); track order._id) {
-            <app-sideorder [navOrder]="order" [count]="$index"></app-sideorder>
+            <app-sideorder [navOrder]="order" [count]="$index" (clickedOrder)="specifiedOrder.set($event)"></app-sideorder>
         }
     </aside>
     <div class="col-span-full md:col-span-3 rounded-2xl">
-        <app-orderdetails></app-orderdetails>
+        <app-orderdetails [desiredOrder]="specifiedOrder()"></app-orderdetails>
     </div>
 </section>

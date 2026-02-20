@@ -36,7 +36,7 @@ interface User {
   phone: string
 }
 
-interface CartItem {
+export interface CartItem {
   count: number
   product: Product
   price: number

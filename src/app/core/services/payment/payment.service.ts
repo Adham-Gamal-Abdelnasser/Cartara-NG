@@ -9,7 +9,6 @@ import { IPaymentResponse } from '../../../shared/models/payment/ipayment.interf
 })
 export class PaymentService {
   private readonly _httpClient = inject(HttpClient)
-
   checkoutSession(cartId:string | null, checkoutData:object):Observable<IPaymentResponse> {
     const returnURL= window.location.origin
     return this._httpClient.post<IPaymentResponse>(`${environment.apiUrl}orders/checkout-session/${cartId}?url=${returnURL}`, checkoutData)

@@ -1,5 +1,5 @@
 import { Component, inject, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
-import { IOrdersResult } from '../../../shared/models/orders/iordersresult.interface';
+import { IOrder, IOrdersResult } from '../../../shared/models/orders/iordersresult.interface';
 import { PaymentService } from '../../../core/services/payment/payment.service';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../../core/services/auth/auth.service';
@@ -17,7 +17,7 @@ export class OrdersComponent {
   private readonly _authService = inject(AuthService)
   private readonly _platform_ID = inject(PLATFORM_ID)
   orders:WritableSignal<IOrdersResult> = signal<IOrdersResult>([])
-
+  specifiedOrder:WritableSignal<IOrder> = signal<IOrder>({} as IOrder)
   recieveUserOrders():void {
     if (isPlatformBrowser(this._platform_ID)) {
       if (localStorage.getItem('userToken')) {
