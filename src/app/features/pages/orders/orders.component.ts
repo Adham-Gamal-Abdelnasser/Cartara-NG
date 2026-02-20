@@ -3,10 +3,12 @@ import { IOrdersResult } from '../../../shared/models/orders/iordersresult.inter
 import { PaymentService } from '../../../core/services/payment/payment.service';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../../core/services/auth/auth.service';
+import { SideorderComponent } from "./components/sideorder/sideorder.component";
+import { OrderdetailsComponent } from "./components/orderdetails/orderdetails.component";
 
 @Component({
   selector: 'app-orders',
-  imports: [],
+  imports: [SideorderComponent, OrderdetailsComponent],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })
@@ -23,7 +25,6 @@ export class OrdersComponent {
         console.log(this._authService.decodedUser().id);
         this._paymentService.getUserOrders(this._authService.decodedUser().id).subscribe(res=>{
           this.orders.set(res)
-          console.log(this.orders())
         })               
       }
     }
