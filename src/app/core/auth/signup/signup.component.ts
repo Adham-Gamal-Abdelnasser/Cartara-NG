@@ -7,7 +7,7 @@ import { ErrormessageComponent } from '../../../shared/components/errormessage/e
 import { AuthService } from '../../services/auth/auth.service';
 import { BehaviorSubject, finalize, Observable, Subscription } from 'rxjs';
 import { SignUpData } from '../../../shared/models/signup/isignup.interface';
-import { ShellIcon, LucideAngularModule } from 'lucide-angular';
+import { LucideAngularModule, LoaderCircleIcon } from 'lucide-angular';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -19,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SignupComponent {
   // todo ________________________________________________icon
-  readonly loader = ShellIcon
+  readonly loader = LoaderCircleIcon
   // todo ________________________________________________props
   isLoading = new BehaviorSubject<boolean>(false);
   signUpForm!:FormGroup

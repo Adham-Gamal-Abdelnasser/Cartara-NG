@@ -8,6 +8,9 @@ import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
 import { IDecodedUser } from '../../../shared/models/decodeduser/idecodeduser.interface';
 import { Router } from '@angular/router';
+import { IForgetPasswordData, IForgetPasswordResponse } from '../../../shared/models/forgetpassword/iforgetpassword.interface';
+import { IResetCodeData, IResetCodeResponse } from '../../../shared/models/resetcode/iresetcode.interface';
+import { IResetPasswordData, IResetPasswordResponse } from '../../../shared/models/resetpassword/iresetpassword.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -47,5 +50,17 @@ export class AuthService {
     this.isLoggedIn$.next(false)  
   }
   this.isLoggedIn$.next(false)  
+  }
+
+  forgotPassword(data:IForgetPasswordData):Observable<IForgetPasswordResponse> {
+    return this._httpClient.post<IForgetPasswordResponse>(`${environment.apiUrl}auth/forgotPasswords`,data)
+  }
+  
+  verifyResetCode(data:IResetCodeData):Observable<IResetCodeResponse> {
+    return this._httpClient.post<IResetCodeResponse>(`${environment.apiUrl}auth/verifyResetCode`,data)
+  }
+  
+  resetPassword(data:IResetPasswordData):Observable<IResetPasswordResponse> {
+    return this._httpClient.put<IResetPasswordResponse>(`${environment.apiUrl}auth/resetPassword`,data)
   }
 }

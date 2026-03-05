@@ -1,5 +1,5 @@
 import { Component, inject, input, InputSignal } from '@angular/core';
-import { LucideAngularModule, LucideIconData, ShellIcon, ShoppingCartIcon } from 'lucide-angular';
+import { LoaderCircleIcon, LucideAngularModule, LucideIconData, ShoppingCartIcon } from 'lucide-angular';
 import { CartService } from '../../../core/services/cart/cart.service';
 import { BehaviorSubject, finalize } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddtocartbuttonComponent {
   readonly shoppingCart:LucideIconData = ShoppingCartIcon
-  readonly loader = ShellIcon
+  readonly loader = LoaderCircleIcon
   prdID:InputSignal<string>=input.required<string>()
   isLoading = new BehaviorSubject<boolean>(false);
 

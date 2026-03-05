@@ -11,6 +11,7 @@ export const routes: Routes = [
     {path: "", component: GuestlayoutComponent, canActivate:[noAuthGuard],children: [
         {path: "login", component: LoginComponent},
         {path: "signup", loadComponent:()=> import('./core/auth/signup/signup.component').then(c=>c.SignupComponent)},
+        {path: "forget-password", loadComponent:()=> import('./core/auth/forgetpassword/forgetpassword.component').then(c=>c.ForgetpasswordComponent)},
     ] },
     {path: "", component: UserlayoutComponent, canActivate:[authGuard],children: [
         {path: "home", component: HomeComponent},

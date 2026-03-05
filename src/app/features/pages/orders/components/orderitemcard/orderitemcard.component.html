@@ -9,10 +9,8 @@
                     <p class="main">{{orderItemInformation().price}}</p> 
                 </div>
                 <p class="line-clamp-2">{{orderItemInformation().product.category.name}}</p>
-                <div class="flex justify-between my-2">
-                    <p class="badge main">{{orderItemInformation().product.brand.name}}</p>
-                    <p class="flex main">{{orderItemInformation().product.ratingsAverage}}<lucide-angular [img]="star" class="text-amber-300"></lucide-angular></p>
-                </div>
+                <p class="flex main">{{orderItemInformation().product.ratingsAverage}}<lucide-angular [img]="star" class="text-amber-300"></lucide-angular></p>
+                <p class="badge main">{{orderItemInformation().product.brand.name}}</p>
             </div>
         </p-card>
 </div>
