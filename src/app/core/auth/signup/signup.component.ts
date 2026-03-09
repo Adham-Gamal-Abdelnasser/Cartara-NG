@@ -7,7 +7,7 @@ import { ErrormessageComponent } from '../../../shared/components/errormessage/e
 import { AuthService } from '../../services/auth/auth.service';
 import { BehaviorSubject, finalize, Observable, Subscription } from 'rxjs';
 import { SignUpData } from '../../../shared/models/signup/isignup.interface';
-import { LucideAngularModule, LoaderCircleIcon } from 'lucide-angular';
+import { LucideAngularModule, LoaderCircleIcon, Phone } from 'lucide-angular';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -33,11 +33,11 @@ export class SignupComponent {
   // todo ________________________________________________set form values
   initiateForm():void {   
     this.signUpForm = this._formBuilder.group({
-      name: new FormControl("",[Validators.required,Validators.minLength(3),Validators.maxLength(15)]),
-      email: new FormControl("",[Validators.required,Validators.email,]),
-      password: new FormControl("",[Validators.required,Validators.pattern("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{5,}")]),
-      rePassword: new FormControl("",[Validators.required]),
-      phone: new FormControl("",[Validators.required,Validators.pattern("^01[0125][0-9]{8}")]),
+      name:["",[Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
+      email: ["",[Validators.required,Validators.email,]],
+      password: ["",[Validators.required,Validators.pattern("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{5,}")]],
+      rePassword: ["",[Validators.required]],
+      phone: ["",[Validators.required,Validators.pattern("^01[0125][0-9]{8}")]],
     }, { validators: this.confirmPasswords })
 
   }
