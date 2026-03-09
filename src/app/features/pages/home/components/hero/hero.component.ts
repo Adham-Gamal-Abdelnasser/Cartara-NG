@@ -10,7 +10,7 @@ import { IPrimeOption } from '../../../../../shared/models/primeoption/iprimeopt
 
 })
 export class HeroComponent {
-  sliderImages= signal<{image:string}[]>([{image:'/2.jpg'},{image:'/2.jpg'}])
+  sliderImages= signal<{image:string}[]>([{image:'/cartara-cover-3.png'},{image:'/2.jpg'},{image:'/2.jpg'},])
   responsiveOptions: IPrimeOption[] | undefined;
   
   initiateResponsiveOptions():void {
