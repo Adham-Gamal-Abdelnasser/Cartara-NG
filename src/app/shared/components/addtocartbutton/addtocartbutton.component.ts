@@ -23,7 +23,6 @@ export class AddtocartbuttonComponent {
   sendproductToCart(){
     this.isLoading.next(true)
     this._cartService.addProducttoCart(this.prdID()).pipe(finalize(()=>{this.isLoading.next(false)})).subscribe(res=>{
-      console.log(res)
       this._cartService.cartCount.set(res.numOfCartItems)
       this._toastrService.info(res.message)
     
