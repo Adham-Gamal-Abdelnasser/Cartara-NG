@@ -5,15 +5,14 @@ import { LetterComponent } from '../../../shared/components/letter/letter.compon
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ErrormessageComponent } from '../../../shared/components/errormessage/errormessage.component';
 import { AuthService } from '../../services/auth/auth.service';
-import { BehaviorSubject, finalize, Observable, Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { SignUpData } from '../../../shared/models/signup/isignup.interface';
 import { LucideAngularModule, LoaderCircleIcon, Phone } from 'lucide-angular';
-import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-signup',
-  imports: [LetterComponent, ReactiveFormsModule, ErrormessageComponent, LucideAngularModule, AsyncPipe],
+  imports: [LetterComponent, ReactiveFormsModule, ErrormessageComponent, LucideAngularModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
@@ -21,7 +20,7 @@ export class SignupComponent {
   // todo ________________________________________________icon
   readonly loader = LoaderCircleIcon
   // todo ________________________________________________props
-  isLoading = new BehaviorSubject<boolean>(false);
+  isLoading :WritableSignal<boolean> = signal<boolean>(false);  
   signUpForm!:FormGroup
   authSubscription!: Subscription
   errorMsg:WritableSignal<string> = signal<string>('')
@@ -66,8 +65,8 @@ export class SignupComponent {
     this.errorMsg.set("")
     if(this.signUpForm.valid){
       const data: Partial<SignUpData> = this.signUpForm.value
-      this.isLoading.next(true)
-      this.authSubscription= this._authService.signUp(data).pipe(finalize(()=>{this.isLoading.next(false)})).subscribe(res => {
+      this.isLoading.set(true)
+      this.authSubscription= this._authService.signUp(data).pipe(finalize(()=>{this.isLoading.set(false)})).subscribe(res => {
         this._router.navigate(["/home"])
         this._toastrService.info(res.message , 'Success' ,{
           progressBar: true,

@@ -8,8 +8,14 @@
             <!-- ! Details -->
             @let detailsControl = checkoutSessionForm.get('shippingAddress')?.get('details');
             <div class="card w-5/6 mx-auto my-6">
-                <label for="details" class="main text-sky-500 capitalize" [class]="{}" class="main text-sky-500 capitalize">details</label>
-                <textarea type="text" formControlName="details" id="details" [class]="{}" rows="4" class="w-full border-2 border-gray-500 rounded-lg outline-none px-2 py-1 focus:border-sky-500 text-gray-500 resize-none" ></textarea>
+                <label for="details" class="main text-sky-500 capitalize" [class]="{
+                    'text-sky-500': detailsControl?.valid && detailsControl?.touched,
+                    'text-red-500': detailsControl?.invalid && detailsControl?.touched,
+                }" class="main text-sky-500 capitalize">details</label>
+                <textarea type="text" formControlName="details" id="details" [class]="{
+                    'border-b-sky-500': detailsControl?.valid && detailsControl?.touched,
+                    'border-b-red-500': detailsControl?.invalid && detailsControl?.touched,
+                }" rows="4" class="w-full border-2 border-gray-500 rounded-lg outline-none px-2 py-1 focus:border-sky-500 text-gray-500 resize-none" ></textarea>
                 @if (detailsControl?.errors && detailsControl?.touched) {
                     <app-errormessage>
                         @if(detailsControl?.getError('required')){ details is required}
@@ -21,8 +27,14 @@
             <!-- ! Phone -->
             @let phoneControl = checkoutSessionForm.get('shippingAddress')?.get('phone');
             <div class="card w-5/6 mx-auto my-6">
-                <label for="phone" class="main text-sky-500 capitalize" [class]="{}" class="main text-sky-500 capitalize">phone</label>
-                <input type="tel" formControlName="phone" id="phone" [class]="{}" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
+                <label for="phone" class="main text-sky-500 capitalize" [class]="{
+                    'text-sky-500': phoneControl?.valid && phoneControl?.touched,
+                    'text-red-500': phoneControl?.invalid && phoneControl?.touched,
+                }" class="main text-sky-500 capitalize">phone</label>
+                <input type="tel" formControlName="phone" id="phone" [class]="{
+                    'border-b-sky-500': phoneControl?.valid && phoneControl?.touched,
+                    'border-b-red-500': phoneControl?.invalid && phoneControl?.touched,
+                }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
                 @if (phoneControl?.errors && phoneControl?.touched) {
                     <app-errormessage>
                         @if(phoneControl?.getError('required')){ Phone is required}
@@ -33,10 +45,16 @@
 
 
             <!-- ! City -->
-             @let cityControl = checkoutSessionForm.get('shippingAddress')?.get('city');
+            @let cityControl = checkoutSessionForm.get('shippingAddress')?.get('city');
             <div class="card w-5/6 mx-auto my-6">
-                <label for="city" class="main text-sky-500 capitalize" [class]="{}" class="main text-sky-500 capitalize">city</label>
-                <input type="tel" formControlName="city" id="city" [class]="{}" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
+                <label for="city" class="main text-sky-500 capitalize" [class]="{
+                    'text-sky-500': cityControl?.valid && cityControl?.touched,
+                    'text-red-500': cityControl?.invalid && cityControl?.touched,
+                }" class="main text-sky-500 capitalize">city</label>
+                <input type="tel" formControlName="city" id="city" [class]="{
+                    'border-b-sky-500': cityControl?.valid && cityControl?.touched,
+                    'border-b-red-500': cityControl?.invalid && cityControl?.touched,
+                }" class="w-full border-b-2 border-b-gray-500 outline-none px-2 py-1 focus:border-sky-500 text-gray-500" />
                 @if (cityControl?.errors && cityControl?.touched) {
                     <app-errormessage>
                         @if(cityControl?.getError('required')){ city is required}
@@ -45,10 +63,10 @@
                 }
             </div>
             
-            <button [disabled]="checkoutSessionForm.invalid || (isLoading | async)" class="w-5/6 cursor-pointer mx-auto flex justify-center gap-2 mt-7 rounded-xl text-zinc-100 main p-2 bg-sky-500 transitioned hover:bg-transparent hover:text-sky-500 border-2 hover:border-sky-500">
+            <button [disabled]="checkoutSessionForm.invalid || (isLoading())" class="w-5/6 cursor-pointer mx-auto flex justify-center gap-2 mt-7 rounded-xl text-zinc-100 main p-2 bg-sky-500 transitioned hover:bg-transparent hover:text-sky-500 border-2 hover:border-sky-500">
                 Pay with Visa
-                @if((isLoading | async)){
-                    <lucide-angular [img]="loader"  class="animate-spin"></lucide-angular>
+                @if((isLoading())){
+                    <lucide-angular [img]="loader" class="animate-spin"></lucide-angular>
                 }
             </button>
         </div>

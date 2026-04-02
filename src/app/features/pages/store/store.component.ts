@@ -8,7 +8,7 @@ import { LetterComponent } from "../../../shared/components/letter/letter.compon
 import { IProduct } from '../../../shared/models/product/iproduct.interface';
 import { ProductsService } from '../../../core/services/products/products.service';
 import { ProductcardComponent } from "../../../shared/components/productcard/productcard.component";
-import { PaginatorModule, Paginator, PaginatorState } from 'primeng/paginator';
+import { Paginator, PaginatorState } from 'primeng/paginator';
 
 
 @Component({

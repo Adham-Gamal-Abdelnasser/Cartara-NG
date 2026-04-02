@@ -1,4 +1,4 @@
-@if(resetCodeFlag | async){
+@if(resetCodeFlag()){
     <section class="m-4 py-20">
     <h1 class="text-center main text-3xl capitalize text-gray-500">
         <app-letter>V</app-letter>erify
@@ -27,7 +27,7 @@
         <div class="w-5/6 mx-auto">
             <button [disabled]="resetCodeForm.invalid" type="submit" class="w-fit cursor-pointer ms-auto flex justify-center gap-2 mt-7 rounded-xl text-zinc-100 main p-2 bg-sky-500 transitioned hover:bg-transparent hover:text-sky-500 border-2 hover:border-sky-500">
                 submit
-                @if((isLoading | async)){
+                @if((isLoading())){
                     <lucide-angular [img]="loader"  class="animate-spin"></lucide-angular>
                 }
             </button>
@@ -35,6 +35,6 @@
     </form>
 </section>
 }
-@if (resetNewPasswordFlag | async) {
+@if (resetNewPasswordFlag()) {
     <app-resetnewpassword></app-resetnewpassword>
 }

@@ -31,7 +31,6 @@
             }
         </div>
 
-
         <!-- ! email -->
         @let emailControl = signUpForm.get('email');
         <div class="card w-5/6 mx-auto my-6">
@@ -50,8 +49,6 @@
                 </app-errormessage>
             }
         </div>
-
-
 
         <!-- ! password -->
         @let passwordControl = signUpForm.get('password');
@@ -72,8 +69,6 @@
             }
         </div>
 
-
-
         <!-- ! rePassword -->
         @let rePasswordControl = signUpForm.get('rePassword');
         <div class="card w-5/6 mx-auto my-6">
@@ -93,8 +88,6 @@
             }
         </div>
 
-
-
         <!-- ! phone -->
         @let phoneControl = signUpForm.get('phone');
         <div class="card w-5/6 mx-auto my-6">
@@ -113,9 +106,9 @@
             }
         </div>
 
-        <button [disabled]="signUpForm.invalid || (isLoading | async)" class="w-5/6 cursor-pointer mx-auto flex justify-center gap-2 mt-7 rounded-xl text-zinc-100 main p-2 bg-sky-500 transitioned hover:bg-transparent hover:text-sky-500 border-2 hover:border-sky-500">
+        <button [disabled]="signUpForm.invalid || (isLoading())" class="w-5/6 cursor-pointer mx-auto flex justify-center gap-2 mt-7 rounded-xl text-zinc-100 main p-2 bg-sky-500 transitioned hover:bg-transparent hover:text-sky-500 border-2 hover:border-sky-500">
             Submit
-            @if((isLoading | async)){
+            @if((isLoading())){
                 <lucide-angular [img]="loader"  class="animate-spin"></lucide-angular>
             }
         </button>

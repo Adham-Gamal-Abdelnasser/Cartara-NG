@@ -4,14 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { LetterComponent } from "../../../../../shared/components/letter/letter.component";
 import { ErrormessageComponent } from "../../../../../shared/components/errormessage/errormessage.component";
 import { LucideAngularModule, ShellIcon } from "lucide-angular";
-import { BehaviorSubject, finalize } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { finalize } from 'rxjs';
 import { PaymentService } from '../../../../../core/services/payment/payment.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-checkout',
-  imports: [ReactiveFormsModule, LetterComponent, LucideAngularModule, AsyncPipe, ErrormessageComponent],
+  imports: [ReactiveFormsModule, LetterComponent, LucideAngularModule, ErrormessageComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })
@@ -22,8 +21,8 @@ export class CheckoutComponent {
   private readonly _paymentService = inject(PaymentService)
   private readonly _toastrService = inject(ToastrService)
   cartID:WritableSignal<string | null>=signal<string | null>(null)
+  isLoading :WritableSignal<boolean> = signal<boolean>(false);  
   checkoutSessionForm!: FormGroup
-  isLoading = new BehaviorSubject<boolean>(false);
   
   getCartIDFromURL():void {
     this._activatedRoute.paramMap.subscribe(res=>{
@@ -45,8 +44,8 @@ export class CheckoutComponent {
 
   submitCheckoutSessionForm():void {
     if (this.checkoutSessionForm.valid) {
-      this.isLoading.next(true)
-      this._paymentService.checkoutSession(this.cartID(),this.checkoutSessionForm.value).pipe(finalize(()=>{this.isLoading.next(false)})).subscribe(res=>{
+      this.isLoading.set(true)
+      this._paymentService.checkoutSession(this.cartID(),this.checkoutSessionForm.value).pipe(finalize(()=>{this.isLoading.set(false)})).subscribe(res=>{
         window.open(res.session.url)
       })
       

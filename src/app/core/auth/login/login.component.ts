@@ -4,8 +4,7 @@ import { FieldComponent } from '../../../shared/components/field/field.component
 import { LetterComponent } from '../../../shared/components/letter/letter.component';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ErrormessageComponent } from "../../../shared/components/errormessage/errormessage.component";
-import { BehaviorSubject, finalize, Subscription } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { finalize, Subscription } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { LogInData } from '../../../shared/models/login/ilogin.interface';
@@ -14,7 +13,7 @@ import { LoaderCircleIcon, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-login',
-  imports: [LetterComponent, ReactiveFormsModule, ErrormessageComponent, AsyncPipe, LucideAngularModule, RouterLink],
+  imports: [LetterComponent, ReactiveFormsModule, ErrormessageComponent, LucideAngularModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -22,7 +21,7 @@ export class LoginComponent {
   // todo ________________________________________________icon
   readonly loader = LoaderCircleIcon
   // todo ________________________________________________props
-  isLoading = new BehaviorSubject<boolean>(false);
+  isLoading:WritableSignal<boolean> = signal(false);  
   authSubscription!: Subscription
   logInForm!: FormGroup;
   errorMsg:WritableSignal<string> = signal<string>('')
@@ -52,8 +51,8 @@ export class LoginComponent {
     this.errorMsg.set("")
     if(this.logInForm.valid){
         const data: Partial<LogInData> = this.logInForm.value
-        this.isLoading.next(true)
-        this.authSubscription= this._authService.logIn(data).pipe(finalize(()=>{this.isLoading.next(false)})).subscribe(res => {
+        this.isLoading.set(true)
+        this.authSubscription= this._authService.logIn(data).pipe(finalize(()=>{this.isLoading.set(false)})).subscribe(res => {
           this._router.navigate(["/home"])
           this._toastrService.info(res.message , 'Success' ,{
             progressBar: true,
