@@ -1,13 +1,17 @@
 <section class="card m-4">
+    <h2 class="main text-3xl m-3">
+        <app-letter>O</app-letter>ur
+        <app-letter>C</app-letter>ategories
+    </h2>
     <p-carousel [value]="categories()" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
         <ng-template let-cat #item >
-            <div (click)="navigateToCategory(cat._id)" class="m-2 cursor-pointer flex flex-col items-center w-fit">
-                <div class="mb-4 w-full">
-                    <div class="rounded-2xl overflow-hidden h-40">
-                        <img [src]="cat.image" [alt]="cat.name" class="w-full" />
-                    </div>
+            <div (click)="navigateToCategory(cat._id)" class="m-2 cursor-pointer flex flex-col items-center relative">
+                <div class="relative w-full rounded-2xl overflow-hidden h-40">
+                   <img [src]="cat.image" class="w-full h-full object-cover" />
+                  <div class="absolute inset-0 bg-linear-to-t from-sky-500/70 via-sky-500/20 to-transparent"></div>
+                  <div class="absolute bottom-3 left-3 text-white font-semibold">{{ cat.name }}</div>
+                  <button class="absolute bottom-3 right-3 bg-white/90 text-black text-xs px-3 py-1 rounded-full">Shop</button>
                 </div>
-                <div class="mb-4 text-center main">{{ cat.name }}</div>
             </div>
         </ng-template>
     </p-carousel>

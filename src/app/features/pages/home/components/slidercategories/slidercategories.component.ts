@@ -5,10 +5,11 @@ import { CarouselModule } from 'primeng/carousel';
 
 import { IPrimeOption } from '../../../../../shared/models/primeoption/iprimeoption.interface';
 import { Router } from '@angular/router';
+import { LetterComponent } from "../../../../../shared/components/letter/letter.component";
 
 @Component({
   selector: 'app-slidercategories',
-  imports: [CarouselModule],
+  imports: [CarouselModule, LetterComponent],
   templateUrl: './slidercategories.component.html',
   styleUrl: './slidercategories.component.css',
 
