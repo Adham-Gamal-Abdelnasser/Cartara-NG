@@ -3,10 +3,11 @@ import { BrandsService } from '../../../../../core/services/brands/brands.servic
 import { IBrand } from '../../../../../shared/models/brand/ibrand.interface';
 import { IPrimeOption } from '../../../../../shared/models/primeoption/iprimeoption.interface';
 import { CarouselModule } from 'primeng/carousel';
+import { LetterComponent } from "../../../../../shared/components/letter/letter.component";
 
 @Component({
   selector: 'app-sliderbrands',
-  imports: [CarouselModule],
+  imports: [CarouselModule, LetterComponent],
   templateUrl: './sliderbrands.component.html',
   styleUrl: './sliderbrands.component.css',
 })
@@ -23,22 +24,22 @@ export class SliderbrandsComponent {
     this.responsiveOptions = [
             {
                 breakpoint: '1400px',
-                numVisible: 4,
+                numVisible: 8,
                 numScroll: 2
             },
             {
                 breakpoint: '1199px',
-                numVisible: 3,
+                numVisible: 8,
                 numScroll: 2
             },
             {
                 breakpoint: '767px',
-                numVisible: 2,
+                numVisible: 5,
                 numScroll: 1
             },
             {
                 breakpoint: '575px',
-                numVisible: 1,
+                numVisible: 3,
                 numScroll: 1
             }
         ];
